@@ -1,0 +1,3 @@
+afterEach(() => {
+  global.sandbox.restore();
+});

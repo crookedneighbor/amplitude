@@ -5,3 +5,5 @@
 --debug
 --compilers js:babel/register
 --check-leaks
+--require ./test/helpers/globals
+--globals sandbox
