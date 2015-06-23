@@ -11,5 +11,14 @@
     "amplitude"
   ],
   "author": "Blade Barringer <blade@crookedneighbor.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "superagent": "^1.2.0"
+  },
+  "devDependencies": {
+    "babel": "^5.6.4",
+    "gulp": "^3.9.0",
+    "mocha": "^2.2.5",
+    "nock": "^2.6.0"
+  }
 }
