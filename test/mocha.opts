@@ -1,0 +1,7 @@
+--colors
+--reporter spec
+--timeout 8000
+--growl
+--debug
+--compilers js:babel/register
+--check-leaks
