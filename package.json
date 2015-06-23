@@ -1,0 +1,15 @@
+{
+  "name": "amplitude",
+  "version": "1.0.0",
+  "description": "A node wrapper for amplitude",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "analytics",
+    "amplitude"
+  ],
+  "author": "Blade Barringer <blade@crookedneighbor.com>",
+  "license": "ISC"
+}
