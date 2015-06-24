@@ -3,7 +3,7 @@ import { Amplitude } from '../lib/amplitude';
 
 describe('track', () => {
 
-  let amplitude = new Amplitude('token');
+  let amplitude = new Amplitude('token', { user_id: 'unique_user_id'});
 
   let data = {
     user_id: 'unique-id',
