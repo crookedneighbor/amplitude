@@ -17,6 +17,7 @@ describe('track', () => {
   });
 
   context('succesful call', () => {
+
     it('does not log error', (done) => {
       nock(api_url).post(stringified_url)
        .reply(200);
@@ -29,6 +30,7 @@ describe('track', () => {
   });
 
   context('unsucesful call', () => {
+
     it('logs error', (done) => {
       nock(api_url).post(stringified_url)
        .replyWithError('not succesful');
