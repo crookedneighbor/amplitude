@@ -18,9 +18,12 @@ describe('track', () => {
 
   context('succesful call', () => {
 
-    it('does not log error', (done) => {
+    beforeEach(() => {
       nock(api_url).post(stringified_url)
        .reply(200);
+    });
+
+    it('does not log error', (done) => {
 
       amplitude.track(data, () => {
         expect(console.error).to.not.be.called;
