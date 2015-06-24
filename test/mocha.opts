@@ -7,3 +7,4 @@
 --check-leaks
 --require ./test/helpers/globals
 --globals sandbox
+--recursive
