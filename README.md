@@ -4,9 +4,8 @@ Server side implimentation of amplitude analytics.
 
 ## Install
 
-```javascript
-# add the following to your package.json
-"amplitude" : "crookedneighbor/amplitude"
+```bash
+npm install amplitude --save
 ```
 
 ## Initialization
