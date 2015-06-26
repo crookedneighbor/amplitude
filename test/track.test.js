@@ -1,5 +1,5 @@
 let nock = require('nock');
-import Amplitude from '../lib/amplitude';
+import Amplitude from '../src/amplitude';
 
 describe('track', () => {
 
