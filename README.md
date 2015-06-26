@@ -1,6 +1,6 @@
 # amplitude
 
-Server side implimentation of amplitude analytics. 
+Server side implimentation of [Amplitude](https://amplitude.com)'s http api.
 
 ## Install
 
