@@ -1,4 +1,4 @@
-import { Amplitude } from '../lib/amplitude';
+import Amplitude from '../lib/amplitude';
 
 describe('initialization', () => {
   context('with api token', () => {
