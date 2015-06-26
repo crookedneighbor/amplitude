@@ -4,5 +4,5 @@ var babel = require('gulp-babel');
 gulp.task('default', function () {
   return gulp.src('./src/amplitude.js')
     .pipe(babel())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('lib'));
 });
