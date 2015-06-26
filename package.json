@@ -1,19 +1,25 @@
 {
   "name": "amplitude",
   "version": "1.0.0",
-  "description": "A node wrapper for amplitude",
-  "main": "lib/amplitude.js",
+  "description": "A node wrapper for Amplitude analytics",
+  "author": "Blade Barringer <blade@crookedneighbor.com>",
   "scripts": {
     "compile": "node_modules/.bin/gulp",
     "prepublish": "npm run compile",
     "test": "mocha"
   },
+  "main": "lib/amplitude.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crookedneighbor/amplitude"
+  },
+  "bugs": {
+    "url": "https://github.com/crookedneighbor/amplitude/issues"
+  },
   "keywords": [
     "analytics",
     "amplitude"
   ],
-  "author": "Blade Barringer <blade@crookedneighbor.com>",
-  "license": "ISC",
   "dependencies": {
     "superagent": "^1.2.0"
   },
@@ -26,5 +32,6 @@
     "nock": "^2.6.0",
     "sinon": "^1.15.3",
     "sinon-chai": "^2.8.0"
-  }
+  },
+  "license": "ISC"
 }
