@@ -38,9 +38,8 @@ amplitude.track(data);
 ## Track an event with an optional callback
 
 ```javascript
-amplitude.track(data, function(error, response){
+amplitude.track(data, function(error) {
   // If post was succesful, error will be null
-  // Currently, the response returned from the amplitude api is an empty object
   //... do something
 });
 ```
