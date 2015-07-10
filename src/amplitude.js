@@ -34,7 +34,7 @@ function _postToApi(token, data, cb) {
         console.error('There was a problem tracking "'
           + data.event_type + '" for "' + name + '"; ' + err);
       }
-      cb(err, res);
+      cb(err);
     });
 }
 

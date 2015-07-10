@@ -1,6 +1,6 @@
 {
   "name": "amplitude",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A node wrapper for Amplitude analytics http api",
   "author": "Blade Barringer <blade@crookedneighbor.com>",
   "scripts": {
