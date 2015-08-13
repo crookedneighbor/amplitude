@@ -43,3 +43,8 @@ amplitude.track(data, function(error, resBody) {
   //... do something
 });
 ```
+
+<!---
+Do not change anything below this comment. It is generated automatically.
+------>
+
