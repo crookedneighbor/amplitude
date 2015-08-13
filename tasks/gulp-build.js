@@ -6,3 +6,7 @@ gulp.task('build', () => {
     .pipe(babel())
     .pipe(gulp.dest('lib'));
 });
+
+gulp.task('build:watch', ['build'], () => {
+  gulp.watch(['src/**'], ['build']);
+});
