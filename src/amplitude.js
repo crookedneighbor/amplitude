@@ -33,9 +33,9 @@ function _postToApi(token, data, cb) {
         var name = data.user_id || data.device_id;
         console.error('There was a problem tracking "'
           + data.event_type + '" for "' + name + '"; ' + err);
-        cb(err);
+        cb(err, res.body);
       } else if(cb) {
-        cb(res.body)
+        cb(null, res.body);
       }
     });
 }

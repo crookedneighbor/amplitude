@@ -18,15 +18,29 @@ describe('track', () => {
   context('succesful call', () => {
 
     beforeEach(() => {
-      nock(api_url).post(stringified_url)
-       .reply(200);
+      nock(api_url)
+        .defaultReplyHeaders({ 'Content-Type': 'application/json' })
+        .post(stringified_url)
+        .reply(function () {
+          return [200, JSON.stringify({ some: 'data' })];
+        });
     });
 
     it('does not log error', (done) => {
       let data = { event_type: 'event' };
 
-      amplitude.track(data, () => {
+      amplitude.track(data, (err) => {
         expect(console.error).to.not.be.called;
+        expect(err).to.be.a('null');
+        done();
+      });
+    });
+
+    it('passes response data', (done) => {
+      let data = { event_type: 'event' };
+
+      amplitude.track(data, (err, data) => {
+        expect(data).to.include.keys('some');
         done();
       });
     });
@@ -36,14 +50,26 @@ describe('track', () => {
     let data = { event_type: 'event' };
 
     beforeEach(() => {
-      nock(api_url).post(stringified_url)
-       .replyWithError('not succesful');
+      nock(api_url)
+        .defaultReplyHeaders({ 'Content-Type': 'application/json' })
+        .post(stringified_url)
+        .reply(function () {
+          return [500, { message: 'not successful' }];
+        })
     });
 
     it('logs error', (done) => {
-      amplitude.track(data, () => {
+      amplitude.track(data, (err, data) => {
         expect(console.error).to.be.calledOnce;
-        expect(console.error).to.be.calledWith('There was a problem tracking "event" for "unique_user_id"; Error: not succesful');
+        expect(console.error).to.be.calledWith('There was a problem tracking "event" for "unique_user_id"; Error: Internal Server Error');
+        done();
+      });
+    });
+
+    it('passes error response data', (done) => {
+      amplitude.track(data, (err, data) => {
+        expect(data).to.include.keys('message');
+        expect(data.message).to.equal('not successful');
         done();
       });
     });
