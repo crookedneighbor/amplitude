@@ -1,8 +1,3 @@
-var gulp = require('gulp');
-var babel = require('gulp-babel');
-
-gulp.task('default', function () {
-  return gulp.src('./src/amplitude.js')
-    .pipe(babel())
-    .pipe(gulp.dest('lib'));
-});
+require('babel/register');
+require('glob').sync('./tasks/gulp-*').forEach(require);
+require('gulp').task('default', ['build']);
