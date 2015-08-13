@@ -3,6 +3,13 @@
   "version": "1.0.6",
   "description": "A node wrapper for Amplitude analytics http api",
   "author": "Blade Barringer <blade@crookedneighbor.com>",
+  "contributors": [
+    {
+      "name": "Erki Esken",
+      "email": "erki@deekit.net",
+      "url": "http://deekit.net/"
+    }
+  ],
   "scripts": {
     "compile": "node_modules/.bin/gulp build",
     "prepublish": "npm run compile",
