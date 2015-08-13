@@ -25,11 +25,11 @@ Pass in any keys listed on the [Amplitude http api](https://amplitude.zendesk.co
 ```javascript
 var data = {
   event_type: "some value", // required
-  event_properties: { 
-    //... 
+  event_properties: {
+    //...
   },
-  user_properties: { 
-    //... 
+  user_properties: {
+    //...
   }
 }
 amplitude.track(data);
