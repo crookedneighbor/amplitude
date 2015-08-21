@@ -24,7 +24,7 @@ function cleanReadme(file) {
 }
 
 function getContributorText() {
-  let text = '\n\n# Contributors\n\n';
+  let text = '\n\n## Contributors\n\n';
   let contributors = PKG.contributors;
 
   for (var index in contributors) {

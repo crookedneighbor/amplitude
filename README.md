@@ -50,3 +50,6 @@ amplitude.track(data)
 Do not change anything below this comment. It is generated automatically.
 ------>
 
+## Contributors
+
++ [Erki Esken](http://deekit.net/)
