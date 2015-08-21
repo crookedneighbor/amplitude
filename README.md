@@ -35,13 +35,15 @@ var data = {
 amplitude.track(data);
 ```
 
-## Track an event with an optional callback
+## The track method returns a promise
 
 ```javascript
-amplitude.track(data, function(error, resBody) {
-  // If post was succesful, error will be null
-  //... do something
-});
+amplitude.track(data)
+  .then(function(result) {
+    //... do something
+  }, function(error) {
+    // If post was succesful, error will be null
+  });
 ```
 
 <!---

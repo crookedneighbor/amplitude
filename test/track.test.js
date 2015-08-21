@@ -11,10 +11,6 @@ describe('track', () => {
   let api_url = 'https://api.amplitude.com';
   let stringified_url = '/httpapi?api_key=token&event=%7B%22event_type%22%3A%22event%22%2C%22user_id%22%3A%22unique_user_id%22%7D';
 
-  beforeEach(() => {
-    sandbox.stub(console, 'error');
-  });
-
   context('succesful call', () => {
 
     beforeEach(() => {
@@ -26,23 +22,17 @@ describe('track', () => {
         });
     });
 
-    it('does not log error', (done) => {
+    it('passes data', () => {
       let data = { event_type: 'event' };
 
-      amplitude.track(data, (err) => {
-        expect(console.error).to.not.be.called;
-        expect(err).to.be.a('null');
-        done();
-      });
+      expect(amplitude.track(data))
+        .to.eventually.eql({ some: 'data' });
     });
 
-    it('passes response data', (done) => {
+    it('does not pass error', () => {
       let data = { event_type: 'event' };
 
-      amplitude.track(data, (err, data) => {
-        expect(data).to.include.keys('some');
-        done();
-      });
+      expect(amplitude.track(data)).to.not.be.rejected;
     });
   });
 
@@ -58,19 +48,14 @@ describe('track', () => {
         })
     });
 
-    it('logs error', (done) => {
-      amplitude.track(data, (err, data) => {
-        expect(console.error).to.be.calledOnce;
-        expect(console.error).to.be.calledWith('There was a problem tracking "event" for "unique_user_id"; Error: Internal Server Error');
-        done();
-      });
+    it('does not resolve', () => {
+      expect(amplitude.track(data)).to.not.be.resolved;
     });
 
-    it('passes error response data', (done) => {
-      amplitude.track(data, (err, data) => {
-        expect(data).to.include.keys('message');
-        expect(data.message).to.equal('not successful');
-        done();
+    it('passes error', () => {
+      expect(amplitude.track(data)).to.be.rejected;
+      expect(amplitude.track(data)).to.be.rejectedWith({
+        message: 'not successful'
       });
     });
   });
