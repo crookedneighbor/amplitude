@@ -42,7 +42,7 @@ amplitude.track(data)
   .then(function(result) {
     //... do something
   }, function(error) {
-    // If post was succesful, error will be null
+    //... do something
   });
 ```
 
