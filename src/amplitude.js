@@ -1,4 +1,5 @@
-let request = require('superagent');
+require('babel-core/polyfill');
+import request from 'superagent';
 
 class Amplitude {
   constructor(token, options={}) {
@@ -30,7 +31,7 @@ function _postToApi(token, data, resolve, reject) {
       event: JSON.stringify(data)
     })
     .set('Accept', 'application/json')
-    .end(function(err, res){
+    .end((err, res) => {
       if (err) {
         var name = data.user_id || data.device_id;
         return reject(err);
