@@ -5,6 +5,6 @@
     "preupdate": "echo 'Bumping version and running tests'",
     "precommit": "npm test",
     "postcommit": "git push && git push --tags && npm publish",
-    "postupdate": "'Updated to version %s'"
+    "postupdate": "echo 'Updated to version %s'"
   }
 }
