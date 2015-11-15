@@ -28,7 +28,7 @@
     "amplitude"
   ],
   "dependencies": {
-    "babel-core": "^5.8.29",
+    "babel-core": "^5.8.34",
     "superagent": "^1.2.0"
   },
   "devDependencies": {
