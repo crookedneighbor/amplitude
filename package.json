@@ -28,10 +28,11 @@
     "amplitude"
   ],
   "dependencies": {
-    "babel-core": "^5.8.34",
+    "q": "^1.4.1",
     "superagent": "^1.2.0"
   },
   "devDependencies": {
+    "babel-core": "^5.8.34",
     "chai": "^3.0.0",
     "chai-as-promised": "^5.1.0",
     "glob": "^5.0.14",

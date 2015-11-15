@@ -1,4 +1,4 @@
-require('babel-core/polyfill');
+import Q from 'q';
 import request from 'superagent';
 
 class Amplitude {
@@ -13,7 +13,7 @@ class Amplitude {
   track(data) {
     data.user_id = data.user_id || this.session_user_id ;
     data.device_id = data.device_id || this.session_device_id ;
-    return new Promise((resolve, reject) => {
+    return Q.Promise((resolve, reject) => {
       _postToApi(this.token, data, resolve, reject);
     });
   }
