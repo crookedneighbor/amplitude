@@ -32,14 +32,14 @@
     "superagent": "^1.2.0"
   },
   "devDependencies": {
-    "babel-core": "^5.8.34",
+    "babel-core": "^6.7.6",
     "chai": "^3.0.0",
     "chai-as-promised": "^5.1.0",
-    "glob": "^5.0.14",
+    "glob": "^7.0.3",
     "gulp": "^3.9.0",
-    "gulp-babel": "^5.3.0",
+    "gulp-babel": "^6.1.2",
     "mocha": "^2.2.5",
-    "nock": "^2.6.0",
+    "nock": "^8.0.0",
     "sinon": "^1.15.3",
     "sinon-chai": "^2.8.0"
   },
