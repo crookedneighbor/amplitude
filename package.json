@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "q": "^1.4.1",
-    "superagent": "^1.2.0"
+    "superagent": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^5.8.34",
