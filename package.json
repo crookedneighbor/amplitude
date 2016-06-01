@@ -12,8 +12,10 @@
   ],
   "scripts": {
     "compile": "gulp build",
-    "prepublish": "npm run compile",
-    "test": "mocha"
+    "prepublish-please": "npm run compile && npm test",
+    "prepublish": "publish-please guard",
+    "test": "mocha",
+    "publish-please": "publish-please"
   },
   "main": "lib/amplitude.js",
   "repository": {
@@ -40,6 +42,7 @@
     "gulp-babel": "^5.3.0",
     "mocha": "^2.2.5",
     "nock": "^2.6.0",
+    "publish-please": "^2.1.4",
     "sinon": "^1.15.3",
     "sinon-chai": "^2.8.0"
   },
