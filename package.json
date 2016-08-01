@@ -34,7 +34,7 @@
     "superagent": "^2.0.0"
   },
   "devDependencies": {
-    "babel-core": "^5.8.34",
+    "babel-core": "^6.9.1",
     "chai": "^3.0.0",
     "chai-as-promised": "^5.1.0",
     "glob": "^5.0.14",
