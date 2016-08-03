@@ -30,7 +30,6 @@
     "amplitude"
   ],
   "dependencies": {
-    "q": "^1.4.1",
     "superagent": "^2.0.0"
   },
   "devDependencies": {
