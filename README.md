@@ -13,11 +13,11 @@ npm install amplitude --save
 ## Initialization
 
 ```javascript
-var Amplitude = require('amplitude');
+var Amplitude = require('amplitude')
 // Initialize with user id
-var amplitude = new Amplitude('api-token', { user_id: 'some-user-id' });
+var amplitude = new Amplitude('api-token', { user_id: 'some-user-id' })
 // Or initialize with device id
-var amplitude = new Amplitude('api-token', { device_id: 'some-device-id' });
+var amplitude = new Amplitude('api-token', { device_id: 'some-device-id' })
 ```
 
 ## Track an event
@@ -34,7 +34,7 @@ var data = {
     //...
   }
 }
-amplitude.track(data);
+amplitude.track(data)
 ```
 
 ## The track method returns a promise
@@ -43,9 +43,9 @@ amplitude.track(data);
 amplitude.track(data)
   .then(function(result) {
     //... do something
-  }, function(error) {
+  }).catch(function(error) {
     //... do something
-  });
+  })
 ```
 
 <!---
