@@ -1,8 +1,9 @@
+'use strict'
+
 let nock = require('nock')
-import Amplitude from '../src/amplitude'
+let Amplitude = require('../amplitude')
 
 describe('track', () => {
-
   let amplitude = new Amplitude('token', {
     user_id: 'unique_user_id',
     deviced_id: 'unqiue-device-id'
@@ -12,7 +13,6 @@ describe('track', () => {
   let stringified_url = '/httpapi?api_key=token&event=%7B%22event_type%22%3A%22event%22%2C%22user_id%22%3A%22unique_user_id%22%7D'
 
   context('succesful call', () => {
-
     beforeEach(() => {
       nock(api_url)
         .defaultReplyHeaders({ 'Content-Type': 'application/json' })

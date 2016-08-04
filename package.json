@@ -11,14 +11,14 @@
     }
   ],
   "scripts": {
-    "compile": "gulp build",
-    "prepublish-please": "npm run compile && npm test",
+    "prepublish-please": "npm test",
     "prepublish": "publish-please guard",
+    "contributors": "node tasks/generate-contributors-list",
     "lint": "standard src/**/*.js test/**/*.js | snazzy",
     "test": "npm run lint && mocha",
     "publish-please": "publish-please"
   },
-  "main": "lib/amplitude.js",
+  "main": "amplitude.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/crookedneighbor/amplitude"
@@ -34,13 +34,9 @@
     "superagent": "^2.0.0"
   },
   "devDependencies": {
-    "babel-core": "^5.8.34",
     "chai": "^3.0.0",
     "chai-as-promised": "^5.1.0",
-    "glob": "^7.0.5",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.3.0",
-    "mocha": "^3.0.0",
+    "mocha": "^2.2.5",
     "nock": "^2.6.0",
     "publish-please": "^2.1.4",
     "sinon": "^1.15.3",

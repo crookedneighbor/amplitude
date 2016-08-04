@@ -1,4 +1,6 @@
-import Amplitude from '../src/amplitude'
+'use strict'
+
+let Amplitude = require('../amplitude')
 
 describe('initialization', () => {
   context('with api token', () => {
