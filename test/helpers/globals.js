@@ -1,11 +1,12 @@
-global.sinon     = require('sinon');
-var sinonChai = require('sinon-chai');
-var chaiAsPromised = require("chai-as-promised");
-global.expect    = require('chai').expect;
-global.chai      = require('chai');
+var chai = require('chai')
+var sinonChai = require('sinon-chai')
+var chaiAsPromised = require('chai-as-promised')
+var sinon = require('sinon')
 
-chai.use(expect);
-chai.use(chaiAsPromised);
-chai.use(sinonChai);
+global.expect = require('chai').expect
 
-global.sandbox = sinon.sandbox.create();
+chai.use(expect)
+chai.use(chaiAsPromised)
+chai.use(sinonChai)
+
+global.sandbox = sinon.sandbox.create()

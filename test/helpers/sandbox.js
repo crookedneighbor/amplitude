@@ -1,3 +1,3 @@
 afterEach(() => {
-  global.sandbox.restore();
-});
+  global.sandbox.restore()
+})
