@@ -14,9 +14,8 @@ function Amplitude (token, options) {
   this.session_device_id = options.device_id
 }
 
-Amplitude.prototype._postToAPI = function (data) {
-  return request
-    .post('https://api.amplitude.com/httpapi')
+Amplitude.prototype._postEvent = function (data) {
+  return request.post('https://api.amplitude.com/httpapi')
     .query({
       api_key: this.token,
       event: JSON.stringify(data)
@@ -29,7 +28,7 @@ Amplitude.prototype.track = function (data) {
   data.user_id = data.user_id || this.session_user_id
   data.device_id = data.device_id || this.session_device_id
 
-  return this._postToAPI(data)
+  return this._postEvent(data)
 }
 
 module.exports = Amplitude
