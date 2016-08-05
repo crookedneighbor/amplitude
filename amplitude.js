@@ -2,6 +2,22 @@
 
 var request = require('superagent')
 
+var camelCaseToSnakeCasePropertyMap = Object.freeze({
+  userId: 'user_id',
+  deviceId: 'device_id',
+  eventType: 'event_type',
+  eventProperties: 'event_properties',
+  userProperties: 'user_properties',
+  appVersion: 'app_version',
+  osName: 'os_name',
+  deviceBrand: 'device_brand',
+  deviceManufacturer: 'device_manufacturer',
+  deviceModel: 'device_model',
+  deviceType: 'device_type',
+  locationLat: 'location_lat',
+  locationLng: 'location_lng'
+})
+
 function Amplitude (token, options) {
   if (!token) {
     throw new Error('No token provided')
@@ -35,10 +51,18 @@ Amplitude.prototype._getExport = function (data) {
 }
 
 Amplitude.prototype.track = function (data) {
-  data.user_id = data.user_id || this.userId
-  data.device_id = data.device_id || this.deviceId
+  var sendData = Object.keys(data).reduce(function (obj, key) {
+    var transformedKey = camelCaseToSnakeCasePropertyMap[key] || key
 
-  return this._postEvent(data)
+    obj[transformedKey] = data[key]
+
+    return obj
+  }, {})
+
+  sendData.user_id = sendData.user_id || this.userId
+  sendData.device_id = sendData.device_id || this.deviceId
+
+  return this._postEvent(sendData)
 }
 
 Amplitude.prototype.export = function (options) {
