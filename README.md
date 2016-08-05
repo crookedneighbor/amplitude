@@ -10,17 +10,12 @@ Server side implimentation of [Amplitude](https://amplitude.com)'s http api.
 npm install amplitude --save
 ```
 
-## Initialization
+## Basic Initialization
 
 ```javascript
 var Amplitude = require('amplitude')
+// The only required field is the api token
 var amplitude = new Amplitude('api-token')
-
-// A user/device id is required in the Amplitude API. If the id will always
-// be the same, you can initialize the amplitude object with it
-var amplitude = new Amplitude('api-token', { user_id: 'some-user-id' })
-// or
-var amplitude = new Amplitude('api-token', { device_id: 'some-device-id' })
 ```
 
 ## Track an event
@@ -42,6 +37,23 @@ var data = {
 amplitude.track(data)
 ```
 
+If the user/device id will always be the same, you can initialize the object with it. Passing a user id or device id in the track call will override the default value set at initialization.
+
+```javascript
+var amplitude = new Amplitude('api-token', { user_id: 'some-user-id' })
+// or
+var amplitude = new Amplitude('api-token', { device_id: 'some-device-id' })
+
+amplitude.track({
+  event_type: 'some value'
+})
+
+amplitude.track({
+  event_type: 'some value',
+  user_id: 'will-override-the-default-id'
+})
+```
+
 ### The track method returns a promise
 
 ```javascript
@@ -51,6 +63,22 @@ amplitude.track(data)
   }).catch(function(error) {
     //... do something
   })
+```
+
+## Export your data
+
+The export method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [export api](https://amplitude.zendesk.com/hc/en-us/articles/205406637-Export-API-Export-your-app-s-event-data) and requires a start and end string in the format `YYYYMMDDTHH`.
+
+```javascript
+var fs = require('fs')
+var stream = fs.createWriteStream('./may-2016-export.zip')
+
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.export({
+  start: '20160501T20',
+  end: '20160601T20'
+}).pipe(stream)
 ```
 
 <!---
