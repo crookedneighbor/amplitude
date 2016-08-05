@@ -118,6 +118,10 @@ amplitude.export({
 }).pipe(stream)
 ```
 
+## Changelog
+
+View the [releases page](https://github.com/crookedneighbor/amplitude/releases) for changes in each version.
+
 <!---
 Do not change anything below this comment. It is generated automatically.
 ------>
