@@ -37,6 +37,41 @@ var data = {
 amplitude.track(data)
 ```
 
+If you prefer camelCase variables, you can pass in the camelCase version instead:
+
+```javascript
+var data = {
+  eventType: 'some value', // required
+  userId: 'some id', // only required if device id is not passed in
+  deviceId: 'some id', // only required if user id is not passed in
+  eventProperties: {
+    //...
+  },
+  userProperties: {
+    //...
+  }
+}
+amplitude.track(data)
+```
+
+This is the full list of properties that will be automatically transformed:
+
+```
+userId -> user_id
+deviceId -> device_id
+eventType -> event_type
+eventProperties -> event_properties
+userProperties -> user_properties
+appVersion -> app_version
+osName -> os_name
+deviceBrand -> device_brand
+deviceManufacturer -> device_manufacturer
+deviceModel -> device_model
+deviceType -> device_type
+locationLat -> location_lat
+locationLng -> location_lng
+```
+
 If the user/device id will always be the same, you can initialize the object with it. Passing a user id or device id in the track call will override the default value set at initialization.
 
 ```javascript
@@ -54,7 +89,7 @@ amplitude.track({
 })
 ```
 
-### The track method returns a promise
+The track method returns a promise.
 
 ```javascript
 amplitude.track(data)
@@ -68,6 +103,8 @@ amplitude.track(data)
 ## Export your data
 
 The export method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [export api](https://amplitude.zendesk.com/hc/en-us/articles/205406637-Export-API-Export-your-app-s-event-data) and requires a start and end string in the format `YYYYMMDDTHH`.
+
+The method returns a stream.
 
 ```javascript
 var fs = require('fs')

@@ -45,6 +45,47 @@ describe('track', function () {
     })
   })
 
+  it('can pass data as camelcase and it will be autoformatted to snake case for the request', function () {
+    let event = {
+      event_type: 'event',
+      user_id: 'different_user_id',
+      device_id: 'different_device_id',
+      event_properties: 'foo',
+      user_properties: 'bar',
+      app_version: 'baz',
+      os_name: 'biz',
+      device_brand: 'buz',
+      device_manufacturer: 'bees',
+      device_model: 'bus',
+      device_type: 'barz',
+      location_lat: 'up',
+      location_lng: 'down'
+    }
+    let data = {
+      eventType: 'event',
+      userId: 'different_user_id',
+      deviceId: 'different_device_id',
+      eventProperties: 'foo',
+      userProperties: 'bar',
+      appVersion: 'baz',
+      osName: 'biz',
+      deviceBrand: 'buz',
+      deviceManufacturer: 'bees',
+      deviceModel: 'bus',
+      deviceType: 'barz',
+      locationLat: 'up',
+      locationLng: 'down'
+    }
+    let mockedRequest = generateMockedRequest(event, 200)
+
+    return this.amplitude.track(data).then((res) => {
+      expect(res).to.eql({ some: 'data' })
+      mockedRequest.done()
+    }).catch((err) => {
+      expect(err).to.not.exist
+    })
+  })
+
   it('can override the user id set on initialization', function () {
     this.event = {
       event_type: 'event',
