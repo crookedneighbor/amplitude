@@ -40,8 +40,6 @@
     "mocha": "^3.0.0",
     "nock": "^8.0.0",
     "publish-please": "^2.1.4",
-    "sinon": "^1.15.3",
-    "sinon-chai": "^2.8.0",
     "snazzy": "^4.0.0",
     "standard": "^7.1.2"
   },

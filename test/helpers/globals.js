@@ -1,14 +1,8 @@
 'use strict'
 
-var chai = require('chai')
-var sinonChai = require('sinon-chai')
-var chaiAsPromised = require('chai-as-promised')
-var sinon = require('sinon')
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
+
+chai.use(chaiAsPromised)
 
 global.expect = require('chai').expect
-
-chai.use(expect)
-chai.use(chaiAsPromised)
-chai.use(sinonChai)
-
-global.sandbox = sinon.sandbox.create()
