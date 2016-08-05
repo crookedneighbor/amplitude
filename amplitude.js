@@ -3,9 +3,11 @@
 var request = require('superagent')
 
 function Amplitude (token, options) {
-  options = options || {}
+  if (!token) {
+    throw new Error('No token provided')
+  }
 
-  _checkForToken(token)
+  options = options || {}
 
   this.token = token
   this.session_user_id = options.user_id
@@ -28,12 +30,6 @@ Amplitude.prototype.track = function (data) {
   data.device_id = data.device_id || this.session_device_id
 
   return this._postToAPI(data)
-}
-
-function _checkForToken (token) {
-  if (!token) {
-    throw new Error('No token provided')
-  }
 }
 
 module.exports = Amplitude
