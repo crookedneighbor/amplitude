@@ -11,8 +11,8 @@ function Amplitude (token, options) {
 
   this.token = token
   this.secretKey = options.secretKey
-  this.session_user_id = options.user_id
-  this.session_device_id = options.device_id
+  this.userId = options.userId || options.user_id
+  this.deviceId = options.deviceId || options.device_id
 }
 
 Amplitude.prototype._postEvent = function (data) {
@@ -35,8 +35,8 @@ Amplitude.prototype._getExport = function (data) {
 }
 
 Amplitude.prototype.track = function (data) {
-  data.user_id = data.user_id || this.session_user_id
-  data.device_id = data.device_id || this.session_device_id
+  data.user_id = data.user_id || this.userId
+  data.device_id = data.device_id || this.deviceId
 
   return this._postEvent(data)
 }

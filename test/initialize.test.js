@@ -15,16 +15,40 @@ describe('initialization', () => {
     expect(amplitude.token).to.eql('token')
   })
 
-  it('sets session_user_id when specified', () => {
-    let amplitude = new Amplitude('token', { user_id: 'db_user_id' })
+  it('sets userId when specified', () => {
+    let amplitude = new Amplitude('token', { userId: 'db_user_id' })
 
-    expect(amplitude.session_user_id).to.eql('db_user_id')
+    expect(amplitude.userId).to.eql('db_user_id')
   })
 
-  it('sets session_device_id when specified', () => {
+  it('can use user_id to set userId', () => {
+    let amplitude = new Amplitude('token', { user_id: 'db_user_id' })
+
+    expect(amplitude.userId).to.eql('db_user_id')
+  })
+
+  it('prefers userId over user_id to set userId', () => {
+    let amplitude = new Amplitude('token', { userId: 'userId', user_id: 'user_id' })
+
+    expect(amplitude.userId).to.eql('userId')
+  })
+
+  it('sets deviceId when specified', () => {
+    let amplitude = new Amplitude('token', { deviceId: 'db_device_id' })
+
+    expect(amplitude.deviceId).to.eql('db_device_id')
+  })
+
+  it('can use device_id to set deviceId', () => {
     let amplitude = new Amplitude('token', { device_id: 'db_device_id' })
 
-    expect(amplitude.session_device_id).to.eql('db_device_id')
+    expect(amplitude.deviceId).to.eql('db_device_id')
+  })
+
+  it('prefers deviceId over device_id to set deviceId', () => {
+    let amplitude = new Amplitude('token', { deviceId: 'deviceId', device_id: 'device_id' })
+
+    expect(amplitude.deviceId).to.eql('deviceId')
   })
 
   it('sets secretKey when specified', () => {
