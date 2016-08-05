@@ -3,8 +3,19 @@
 const Amplitude = require('../amplitude')
 const nock = require('nock')
 
-const API_URL = 'https://amplitude.com/api/2'
-const STRINGIFIED_URL = '/export?start=20160523T20&end=20160525T20'
+function generateMockedRequest (query, status) {
+  let mockedRequest = nock('https://amplitude.com')
+    .defaultReplyHeaders({ 'Content-Type': 'application/zip' })
+    .get('/api/2/export')
+    .query(query)
+    .basicAuth({
+      user: 'token',
+      pass: 'key'
+    })
+    .reply(status)
+
+  return mockedRequest
+}
 
 describe('export', function () {
   beforeEach(function () {
@@ -42,43 +53,25 @@ describe('export', function () {
   });
 
   it('resolves a zip when succesful', function () {
-    this.mockedRequest = nock(API_URL)
-      .defaultReplyHeaders({ 'Content-Type': 'application/zip' })
-      .get(STRINGIFIED_URL)
-      .basicAuth({
-        user: 'token',
-        pass: 'key'
-      })
-      .reply(() => {
-        return [200, 'yay']
-      })
+    let mockedRequest = generateMockedRequest(this.options, 200)
 
     return this.amplitude.export(this.options).then((data) => {
       expect(data.res.headers['content-type']).to.eql('application/zip')
-      this.mockedRequest.done()
+      mockedRequest.done()
     }).catch((err) => {
       expect(err).to.not.exist
     })
   })
 
   it('rejects with error when unsuccesful', function () {
-    this.mockedRequest = nock(API_URL)
-    .defaultReplyHeaders({ 'Content-Type': 'text/html; charset=UTF-8' })
-    .get(STRINGIFIED_URL)
-    .basicAuth({
-      user: 'token',
-      pass: 'key'
-    })
-    .reply(function () {
-      return [403, 'not successful']
-    })
+    let mockedRequest = generateMockedRequest(this.options, 403)
 
     return this.amplitude.export(this.options).then((res) => {
       throw new Error('Should not have resolved')
     }).catch((err) => {
       expect(err.status).to.eql(403);
       expect(err.message).to.eql('Forbidden');
-      this.mockedRequest.done()
+      mockedRequest.done()
     });
   })
 })
