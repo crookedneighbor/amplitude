@@ -37,7 +37,28 @@ var data = {
 amplitude.track(data)
 ```
 
-If you prefer camelCase variables, you can pass in the camelCase version instead:
+## Identify API
+
+The `identify` method allows you to [make changes to a user without sending an analytics event](https://amplitude.zendesk.com/hc/en-us/articles/205406617). 
+
+```javascript
+var data = {
+  event_type: 'some value', // required
+  user_id: 'some id', // only required if device id is not passed in
+  device_id: 'some id', // only required if user id is not passed in
+  event_properties: {
+    //...
+  },
+  user_properties: {
+    //...
+  }
+}
+amplitude.identify(data)
+```
+
+### CamelCase Data
+
+If you prefer camelCase variables, you can pass in the camelCase version instead to the `track` and `identify` methods:
 
 ```javascript
 var data = {
@@ -72,7 +93,9 @@ locationLat -> location_lat
 locationLng -> location_lng
 ```
 
-If the user/device id will always be the same, you can initialize the object with it. Passing a user id or device id in the track call will override the default value set at initialization.
+### User/Device ID
+
+If the user/device id will always be the same, you can initialize the object with it. Passing a user id or device id in the `track` and `identify` methods will override the default value set at initialization.
 
 ```javascript
 var amplitude = new Amplitude('api-token', { user_id: 'some-user-id' })
@@ -89,7 +112,9 @@ amplitude.track({
 })
 ```
 
-The track method returns a promise.
+### Promises
+
+The `track` and `identify` methods returns a promise.
 
 ```javascript
 amplitude.track(data)

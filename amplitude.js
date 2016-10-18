@@ -31,27 +31,8 @@ function Amplitude (token, options) {
   this.deviceId = options.deviceId || options.device_id
 }
 
-Amplitude.prototype._postEvent = function (data) {
-  return request.post('https://api.amplitude.com/httpapi')
-    .query({
-      api_key: this.token,
-      event: JSON.stringify(data)
-    })
-    .set('Accept', 'application/json')
-    .then(res => res.body)
-}
-
-Amplitude.prototype._getExport = function (data) {
-  return request.get('https://amplitude.com/api/2/export')
-    .auth(this.token, this.secretKey)
-    .query({
-      start: data.start,
-      end: data.end
-    })
-}
-
-Amplitude.prototype.track = function (data) {
-  var sendData = Object.keys(data).reduce(function (obj, key) {
+Amplitude.prototype._generateRequestData = function (data) {
+  var transformedData = Object.keys(data).reduce(function (obj, key) {
     var transformedKey = camelCaseToSnakeCasePropertyMap[key] || key
 
     obj[transformedKey] = data[key]
@@ -59,10 +40,37 @@ Amplitude.prototype.track = function (data) {
     return obj
   }, {})
 
-  sendData.user_id = sendData.user_id || this.userId
-  sendData.device_id = sendData.device_id || this.deviceId
+  transformedData.user_id = transformedData.user_id || this.userId
+  transformedData.device_id = transformedData.device_id || this.deviceId
 
-  return this._postEvent(sendData)
+  return transformedData
+}
+
+Amplitude.prototype.identify = function (data) {
+  var transformedData = this._generateRequestData(data)
+
+  return request.post('https://api.amplitude.com/identify')
+    .set('Accept', 'application/json')
+    .query({
+      api_key: this.token,
+      identification: JSON.stringify(transformedData)
+    }).then(function (res) {
+      return res.body
+    })
+}
+
+Amplitude.prototype.track = function (data) {
+  var transformedData = this._generateRequestData(data)
+
+  return request.post('https://api.amplitude.com/httpapi')
+    .query({
+      api_key: this.token,
+      event: JSON.stringify(transformedData)
+    })
+    .set('Accept', 'application/json')
+    .then(function (res) {
+      return res.body
+    })
 }
 
 Amplitude.prototype.export = function (options) {
@@ -76,7 +84,12 @@ Amplitude.prototype.export = function (options) {
     throw new Error('`start` and `end` are required options')
   }
 
-  return this._getExport(options)
+  return request.get('https://amplitude.com/api/2/export')
+    .auth(this.token, this.secretKey)
+    .query({
+      start: options.start,
+      end: options.end
+    })
 }
 
 module.exports = Amplitude
