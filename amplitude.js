@@ -41,6 +41,16 @@ Amplitude.prototype._postEvent = function (data) {
     .then(res => res.body)
 }
 
+Amplitude.prototype._identifyUser = function (data) {
+  return request.post('https://api.amplitude.com/identify')
+    .set('Accept', 'application/json')
+    .send({
+      api_key: this.token,
+      identification: data
+    })
+    .then(res => res.body)
+}
+
 Amplitude.prototype._getExport = function (data) {
   return request.get('https://amplitude.com/api/2/export')
     .auth(this.token, this.secretKey)
@@ -48,6 +58,21 @@ Amplitude.prototype._getExport = function (data) {
       start: data.start,
       end: data.end
     })
+}
+
+Amplitude.prototype.identify = function (data) {
+  var sendData = Object.keys(data).reduce(function (obj, key) {
+    var transformedKey = camelCaseToSnakeCasePropertyMap[key] || key
+
+    obj[transformedKey] = data[key]
+
+    return obj
+  }, {})
+
+  sendData.user_id = sendData.user_id || this.userId
+  sendData.device_id = sendData.device_id || this.deviceId
+
+  return this._identifyUser(sendData)
 }
 
 Amplitude.prototype.track = function (data) {
