@@ -95,7 +95,7 @@ Amplitude.prototype.export = function (options) {
     })
 }
 
-Amplitude.prototype.userSearch = function (userSearchId) {
+Amplitude.prototype.userSearch = function (userSearchId, opts) {
 
   if (!this.secretKey) {
     throw new Error('secretKey must be set to use the export method')
@@ -105,6 +105,10 @@ Amplitude.prototype.userSearch = function (userSearchId) {
     throw new Error('value to search for must be passed.')
   }
 
+  opts = opts || {}
+
+  var userActivity = this.userActivity.bind(this)
+
   return request.get(amplitudeSecretEndPoint + '/api/2/usersearch')
   .auth(this.token, this.secretKey)
   .query({
@@ -112,6 +116,14 @@ Amplitude.prototype.userSearch = function (userSearchId) {
   })
   .set('Accept', 'application/json')
   .then(function (res) {
+
+    if(opts.withUserActivity && res.body && Array.isArray(res.body.matches)) {
+      if(res.body.matches.length > 0) {
+        return userActivity(res.body.matches[0].amplitude_id)
+      }
+
+      return {userData: {}, events: []}
+    }
     return res.body
   })
 

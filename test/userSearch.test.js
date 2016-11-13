@@ -1,5 +1,6 @@
 'use strict'
 
+const sinon = require('sinon')
 const nock = require('nock')
 const Amplitude = require('../amplitude')
 
@@ -19,10 +20,15 @@ function generateMockedRequest(userSearchId, matches, status) {
 }
 
 describe('userSearch', function () {
+  let userActivityStub
+
   beforeEach(function () {
     this.amplitude = new Amplitude('token', {
       secretKey: 'key'
     })
+
+    userActivityStub = sinon.stub(this.amplitude, 'userActivity')
+
     this.userSearchIds = {
       found_by_amplitude_id: {
         'matches': [
@@ -81,8 +87,10 @@ describe('userSearch', function () {
       expect(res.matches).to.be.a('array')
       expect(res.matches.length).to.eql(1)
       expect(res.type).to.eql('match_amplitude_id')
+      expect(userActivityStub.calledOnce).to.be.false
       mockedRequest.done()
     }).catch((err) => {
+      console.error(err)
       expect(err).to.not.exist
     })
   })
@@ -91,12 +99,15 @@ describe('userSearch', function () {
     let search = 'user_id_2'
     let mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_user_props, 200)
 
+
+
     return this.amplitude.userSearch(search).then((res) => {
       expect(res.matches).to.be.a('array')
       expect(res.matches.length).to.eql(1)
       expect(res.type).to.eql('match_user_props')
       mockedRequest.done()
     }).catch((err) => {
+      console.error(err)
       expect(err).to.not.exist
     })
   })
@@ -109,6 +120,37 @@ describe('userSearch', function () {
       expect(res.matches).to.be.a('array')
       expect(res.matches.length).to.eql(1)
       expect(res.type).to.eql('match_user_or_device_id')
+      mockedRequest.done()
+    }).catch((err) => {
+      console.error(err)
+      expect(err).to.not.exist
+    })
+  })
+
+  it('resolves the first found match `userActivity`', function () {
+    let search = 'user_id_3'
+    let mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_user_or_device_id, 200)
+
+    userActivityStub.withArgs(this.userSearchIds.found_by_user_or_device_id.matches[0].amplitude_id).onFirstCall().returns(Promise.resolve({userData: {}, events: []}))
+
+    return this.amplitude.userSearch(search, {withUserActivity: true}).then((res) => {
+      expect(res.userData).to.be.a('object')
+      expect(res.events).to.be.a('array')
+      mockedRequest.done()
+    }).catch((err) => {
+      expect(err).to.not.exist
+    })
+  })
+
+  it('resolves an empty userData object if there are no matches from `userActivity`', function () {
+    let ampId = 1234567
+    let mockedRequest = generateMockedRequest(ampId, this.userSearchIds.not_found, 200)
+
+    userActivityStub.withArgs(ampId).onFirstCall().returns(Promise.resolve({userData: {}, events: []}))
+
+    return this.amplitude.userSearch(ampId, {withUserActivity: true}).then((res) => {
+      expect(res.userData).to.be.a('object')
+      expect(res.events).to.be.a('array')
       mockedRequest.done()
     }).catch((err) => {
       expect(err).to.not.exist
@@ -125,6 +167,7 @@ describe('userSearch', function () {
       expect(res.type).to.eql('nomatch')
       mockedRequest.done()
     }).catch((err) => {
+      console.error(err)
       expect(err).to.not.exist
     })
   })

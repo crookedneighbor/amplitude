@@ -155,6 +155,15 @@ var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
 amplitude.userSearch('some-id-or-user-prop')
 ```
 
+Search for a user with a specified Amplitude ID, Device ID, User ID, or User ID prefix. The method returns the `userActivity()` object of the first match amplitude_id.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.userSearch('some-id-or-user-prop', {withUserActivity:: true})
+```
+
+
 ## User Activity
 
 The export method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [dashboard api](https://amplitude.zendesk.com/hc/en-us/articles/205469748-Dashboard-Rest-API-Export-Amplitude-Dashboard-Data#user-activity).
