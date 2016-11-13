@@ -114,7 +114,7 @@ amplitude.track({
 
 ### Promises
 
-The `track` and `identify` methods returns a promise.
+All methods return a Promise.
 
 ```javascript
 amplitude.track(data)
@@ -125,7 +125,9 @@ amplitude.track(data)
   })
 ```
 
-## Export your data
+## Dashboard API
+
+### Export your data
 
 The export method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [export api](https://amplitude.zendesk.com/hc/en-us/articles/205406637-Export-API-Export-your-app-s-event-data) and requires a start and end string in the format `YYYYMMDDTHH`.
 
@@ -143,6 +145,80 @@ amplitude.export({
 }).pipe(stream)
 ```
 
+### User Search
+
+The user search method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [dashboard api](https://amplitude.zendesk.com/hc/en-us/articles/205469748-Dashboard-Rest-API-Export-Amplitude-Dashboard-Data#user%20search).
+
+Search for a user with a specified Amplitude ID, Device ID, User ID, or User ID prefix.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.userSearch('user/device/amplitude id or user id prefix').then(function (res) {
+  var matches = res.matches // Array of matches
+
+  // How the match was made
+  // If exact match was made with user id or device id, type === 'match_user_or_device_id'
+  // If exact match was made with Amplitude ID, type === 'match_amplitude_id'
+  // If a partial match was made with a user id prefix, type === 'match_user_prefix'
+  // If no match was made, type === 'nomatch'
+  var type = res.type
+})
+```
+
+### User Activity
+
+The user activity method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [dashboard api](https://amplitude.zendesk.com/hc/en-us/articles/205469748-Dashboard-Rest-API-Export-Amplitude-Dashboard-Data#user-activity).
+
+Get a user summary and their recent events. This method requires an Amplitude ID. You can use the [user search](#user-search) method to find that.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.userActivity('Amplitude ID').then(function (res) {
+  var userData = res.userData // data about the user
+  var events = res.events // an array of events associated with the user
+})
+```
+
+If there is nothing found for the passed Amplitude ID, the Promise will still resolve. The `userData` object will contain empty values and the `events` array will be empty:
+
+```javascript
+{
+  userData: {
+    num_sessions: 0,
+    purchases: 0,
+    revenue: 0,
+    merged_amplitude_ids: [],
+    num_events: 0,
+    canonical_amplitude_id: 1,
+    user_id: null,
+    last_location: null,
+    usage_time: 0,
+    last_device_id: null,
+    device_ids: []
+  },
+  events: []
+}
+```
+
+If you do not know the Amplitude ID, you can use the [userSearch](#user-search) method to find it.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.userSearch('user-id').then(function (res) {
+  // If you're using a prefix, you may get multiple matches and
+  // you may need to handle the case where there is not a match
+  var match = res.matches[0]
+
+  return amplitude.userActivity(match.amplitude_id)
+}).then(function (res) {
+  var userData = res.userData // data about the user
+  var events = res.events // an array of events associated with the user
+})
+```
+
 ## Changelog
 
 View the [releases page](https://github.com/crookedneighbor/amplitude/releases) for changes in each version.
@@ -154,3 +230,4 @@ Do not change anything below this comment. It is generated automatically.
 ## Contributors
 
 + [Erki Esken](http://deekit.net/)
++ [Matthew Keesan](http://keesan.net)
