@@ -143,6 +143,30 @@ amplitude.export({
 }).pipe(stream)
 ```
 
+## User Search
+
+The export method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [dashboard api](https://amplitude.zendesk.com/hc/en-us/articles/205469748-Dashboard-Rest-API-Export-Amplitude-Dashboard-Data#user%20search).
+
+Search for a user with a specified Amplitude ID, Device ID, User ID, or User ID prefix. The method returns a 'matches' object.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.userSearch('some-id-or-user-prop')
+```
+
+## User Activity
+
+The export method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [dashboard api](https://amplitude.zendesk.com/hc/en-us/articles/205469748-Dashboard-Rest-API-Export-Amplitude-Dashboard-Data#user-activity).
+
+Get a user summary and their recent events. The method returns a 'userData' object. This method requires an amplitude_id. You can use userSearch method to find that.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.userActivity('amplitude_id')
+```
+
 ## Changelog
 
 View the [releases page](https://github.com/crookedneighbor/amplitude/releases) for changes in each version.
