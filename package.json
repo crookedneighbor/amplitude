@@ -11,7 +11,8 @@
       "name": "Erki Esken",
       "email": "erki@deekit.net",
       "url": "http://deekit.net/"
-    }, {
+    },
+    {
       "name": "Matthew Keesan",
       "email": "hi@keesan.net",
       "url": "http://keesan.net"
@@ -45,6 +46,7 @@
     "mocha": "^3.0.0",
     "nock": "^9.0.2",
     "publish-please": "^2.1.4",
+    "sinon": "^1.17.6",
     "snazzy": "^4.0.0",
     "standard": "^8.0.0"
   },

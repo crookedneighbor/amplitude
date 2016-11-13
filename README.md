@@ -143,6 +143,125 @@ amplitude.export({
 }).pipe(stream)
 ```
 
+## User Search
+
+The user search method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [dashboard api](https://amplitude.zendesk.com/hc/en-us/articles/205469748-Dashboard-Rest-API-Export-Amplitude-Dashboard-Data#user%20search).
+
+Search for a user with a specified Amplitude ID, Device ID, User ID, or User ID prefix.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.userSearch('some-id-or-user-prop')
+```
+
+This method returns a Promise that resolves to a 'matches' object. An example 'matches' object looks like:
+
+```javascript
+{
+    "matches": [
+        {
+            "user_id": "myusername",
+            "amplitude_id": 12345
+        }
+    ],
+    "type": "match_user_or_device_id"
+}
+```
+
+Or if no matches were found:
+```javascript
+{
+    "matches": [],
+    "type": "nomatch"
+}
+```
+
+Search for a user with a specified Amplitude ID, Device ID, User ID, or User ID prefix.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.userSearch('some-id-or-user-prop', {withUserActivity: true})
+```
+
+The method returns the `userActivity()` Promise of the first match (see below for an example).
+
+
+## User Activity
+
+The user activity method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [dashboard api](https://amplitude.zendesk.com/hc/en-us/articles/205469748-Dashboard-Rest-API-Export-Amplitude-Dashboard-Data#user-activity).
+
+Get a user summary and their recent events. This method requires an amplitude_id. You can use the user search method to find that.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.userActivity('amplitude_id')
+```
+
+This method returns a Promise that resolves to a 'userData' object. An example 'userData' object looks like:
+
+```javascript
+{
+    "userData": {
+        "user_id": "myusername",
+        "canonical_amplitude_id": 12345,
+        "merged_amplitude_ids": [11111, 22222],
+        "num_events": 142,
+        "num_sessions": 23,
+        "usage_time": 2570259,
+        "first_used": "2015-03-14",
+        "last_used": "2015-04-22",
+        "purchases": 2,
+        "revenue": 9.98,
+        "platform": "iOS",
+        "os": "ios 8.2",
+        "version": "3.4.9",
+        "device": "Apple iPhone",
+        "device_type": "Apple iPhone 6",
+        "carrier": "AT&T",
+        "country": "United States",
+        "region": "California",
+        "city": "San Francisco",
+        "dma": "San Francisco-Oakland-San Jose, CA",
+        "language": "English",
+        "start_version": "1.2.3",
+        "device_ids": ["somedevice", "someotherdevice"],
+        "last_location": {
+            "lat": 37.133,
+            "lng": -122.241
+        },
+        "properties": {
+            "age": 32
+            "gender": "female"
+        }
+    },
+    "events": [...]
+}
+```
+
+If there is nothing found for the passed 'amplitude_id', the Promise will resolve to an empty 'userData' object:
+
+```javascript
+{
+    "userData": {
+        "num_sessions": 0,
+        "purchases": 0,
+        "revenue": 0,
+        "merged_amplitude_ids": [],
+        "num_events": 0,
+        "canonical_amplitude_id": 1,
+        "user_id": null,
+        "last_location": null,
+        "usage_time": 0,
+        "last_device_id": null,
+        "device_ids": []
+    },
+    "events": []
+}
+```
+
 ## Changelog
 
 View the [releases page](https://github.com/crookedneighbor/amplitude/releases) for changes in each version.
