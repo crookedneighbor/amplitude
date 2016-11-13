@@ -9,15 +9,14 @@ function generateMockedRequest(userSearchId, matches, status) {
     query = userSearchId
   }
   return nock('https://amplitude.com')
-  .defaultReplyHeaders({'Content-Type': 'application/json'})
-  .get('/api/2/useractivity')
-  .query(query)
-  .basicAuth({
-    user: 'token',
-    pass: 'key'
-  })
-  .reply(status, matches)
-
+    .defaultReplyHeaders({'Content-Type': 'application/json'})
+    .get('/api/2/useractivity')
+    .query(query)
+    .basicAuth({
+      user: 'token',
+      pass: 'key'
+    })
+    .reply(status, matches)
 }
 
 describe('userActivity', function () {
@@ -106,14 +105,13 @@ describe('userActivity', function () {
 
     expect(() => {
       this.amplitude.userActivity('anything')
-    }).to.throw('secretKey must be set to use the export method')
+    }).to.throw('secretKey must be set to use the userActivity method')
   });
 
   it('throws an error if nothing passed', function () {
-
     expect(() => {
       this.amplitude.userActivity()
-    }).to.throw('amplitude_id for must be passed.')
+    }).to.throw('amplitude_id must be passed')
   });
 
   it('resolves user data and list of events when passed an existing amplitude_id', function () {

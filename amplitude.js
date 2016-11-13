@@ -96,13 +96,12 @@ Amplitude.prototype.export = function (options) {
 }
 
 Amplitude.prototype.userSearch = function (userSearchId, opts) {
-
   if (!this.secretKey) {
-    throw new Error('secretKey must be set to use the export method')
+    throw new Error('secretKey must be set to use the userSearch method')
   }
 
   if(!userSearchId) {
-    throw new Error('value to search for must be passed.')
+    throw new Error('value to search for must be passed')
   }
 
   opts = opts || {}
@@ -110,13 +109,12 @@ Amplitude.prototype.userSearch = function (userSearchId, opts) {
   var userActivity = this.userActivity.bind(this)
 
   return request.get(amplitudeSecretEndPoint + '/api/2/usersearch')
-  .auth(this.token, this.secretKey)
-  .query({
-    user: userSearchId
-  })
-  .set('Accept', 'application/json')
-  .then(function (res) {
-
+    .auth(this.token, this.secretKey)
+    .query({
+      user: userSearchId
+    })
+    .set('Accept', 'application/json')
+    .then(function (res) {
     if(opts.withUserActivity && res.body && Array.isArray(res.body.matches)) {
       if(res.body.matches.length > 0) {
         return userActivity(res.body.matches[0].amplitude_id)
@@ -126,7 +124,6 @@ Amplitude.prototype.userSearch = function (userSearchId, opts) {
     }
     return res.body
   })
-
 }
 
 Amplitude.prototype.userActivity = function (amplitudeId, opts) {
@@ -134,21 +131,20 @@ Amplitude.prototype.userActivity = function (amplitudeId, opts) {
   opts.user = amplitudeId
 
   if (!this.secretKey) {
-    throw new Error('secretKey must be set to use the export method')
+    throw new Error('secretKey must be set to use the userActivity method')
   }
 
   if(!amplitudeId) {
-    throw new Error('amplitude_id for must be passed.')
+    throw new Error('amplitude_id must be passed')
   }
 
   return request.get(amplitudeSecretEndPoint + '/api/2/useractivity')
-  .auth(this.token, this.secretKey)
-  .query(opts)
-  .set('Accept', 'application/json')
-  .then(function (res) {
-    return res.body
-  })
-
+    .auth(this.token, this.secretKey)
+    .query(opts)
+    .set('Accept', 'application/json')
+    .then(function (res) {
+      return res.body
+    })
 }
 
 
