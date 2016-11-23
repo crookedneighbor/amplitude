@@ -65,11 +65,18 @@ Amplitude.prototype.identify = function (data) {
 Amplitude.prototype.track = function (data) {
   var transformedData = this._generateRequestData(data)
 
+  var params = {
+    api_key: this.token,
+    event: JSON.stringify(transformedData)
+  };
+
+  var encodedParams = Object.keys(params).map((key) => {
+    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+  }).join('&');
+
   return request.post(AMPLITUDE_TOKEN_ENDPOINT + '/httpapi')
-    .query({
-      api_key: this.token,
-      event: JSON.stringify(transformedData)
-    })
+    .send(encodedParams)
+    .type('application/x-www-form-urlencoded')
     .set('Accept', 'application/json')
     .then(function (res) {
       return res.body
