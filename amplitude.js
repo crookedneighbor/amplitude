@@ -68,11 +68,11 @@ Amplitude.prototype.track = function (data) {
   var params = {
     api_key: this.token,
     event: JSON.stringify(transformedData)
-  };
+  }
 
-  var encodedParams = Object.keys(params).map((key) => {
-    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-  }).join('&');
+  var encodedParams = Object.keys(params).map(function (key) {
+    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+  }).join('&')
 
   return request.post(AMPLITUDE_TOKEN_ENDPOINT + '/httpapi')
     .send(encodedParams)

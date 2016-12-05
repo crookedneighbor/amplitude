@@ -22,7 +22,7 @@
     "prepublish-please": "npm test",
     "prepublish": "publish-please guard",
     "contributors": "node tasks/generate-contributors-list",
-    "lint": "standard src/**/*.js test/**/*.js | snazzy",
+    "lint": "standard *.js test/**/*.js | snazzy",
     "test": "npm run lint && mocha",
     "publish-please": "publish-please"
   },
