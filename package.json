@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "chai": "^3.0.0",
+    "ecmascript-version-detector": "^1.0.3",
     "mocha": "^3.0.0",
     "nock": "^9.0.2",
     "publish-please": "^2.1.4",
