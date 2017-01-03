@@ -1,7 +1,6 @@
 'use strict'
 
 const parseEcmascriptVersion = require('ecmascript-version-detector').parse
-const ReadableStream = require('stream').Readable
 const glob = require('glob').sync
 const fs = require('fs')
 const path = require('path')
