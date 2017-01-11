@@ -54,7 +54,7 @@
     "publish-please": "^2.1.4",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
-    "snazzy": "^4.0.0",
+    "snazzy": "^6.0.0",
     "standard": "^8.0.0"
   },
   "license": "ISC",
