@@ -143,4 +143,26 @@ Amplitude.prototype.userActivity = function (amplitudeId, data) {
     })
 }
 
+Amplitude.prototype.eventSegmentation = function (data) {
+  if (!this.secretKey) {
+    throw new Error('secretKey must be set to use the eventSegmentation method')
+  }
+
+  if (!data.e || !data.start || !data.end) {
+    throw new Error('`e`, `start` and `end` are required data properties')
+  }
+
+  if (typeof data.e === 'object') {
+    data.e = JSON.stringify(data.e)
+  }
+
+  return request.get(AMPLITUDE_DASHBOARD_ENDPOINT + '/events/segmentation')
+    .auth(this.token, this.secretKey)
+    .query(data)
+    .set('Accept', 'application/json')
+    .then(function (res) {
+      return res.body
+    })
+}
+
 module.exports = Amplitude
