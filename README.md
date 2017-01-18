@@ -219,6 +219,53 @@ amplitude.userSearch('user-id').then(function (res) {
 })
 ```
 
+### Event Segmentation
+
+The event segmentation method requires your [secret key](https://amplitude.zendesk.com/hc/en-us/articles/206728448-Where-can-I-find-my-app-s-API-Key-or-Secret-Key-) to be added when initializing the amplitude object. This method uses the [dashboard api](https://amplitude.zendesk.com/hc/en-us/articles/205469748-Dashboard-Rest-API-Export-Amplitude-Dashboard-Data#event-segmentation).
+
+Get metrics for an event with segmentation.
+
+```javascript
+var amplitude = new Amplitude('api-token', { secretKey: 'secret' })
+
+amplitude.eventSegmentation({
+  e: {
+    'event_type': 'event_name'
+  },
+  start: '20170104',
+  end: '20170117',
+})
+.then((res) => {
+  var segmentationData = res.data
+})
+```
+
+Example response:
+
+```javascript
+{
+  { series: [ [ 2, 25, 3, 1, 0, 0, 2, 3, 5, 1, 0, 0, 0, 0 ] ],
+  seriesLabels: [ 0 ],
+  xValues: 
+   [ '2017-01-04',
+     '2017-01-05',
+     '2017-01-06',
+     '2017-01-07',
+     '2017-01-08',
+     '2017-01-09',
+     '2017-01-10',
+     '2017-01-11',
+     '2017-01-12',
+     '2017-01-13',
+     '2017-01-14',
+     '2017-01-15',
+     '2017-01-16',
+     '2017-01-17' ] }
+}
+```
+
+If the event does not exist, Amplitude will throw a 400 error.
+
 ## Changelog
 
 View the [releases page](https://github.com/crookedneighbor/amplitude/releases) for changes in each version.
