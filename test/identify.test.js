@@ -69,7 +69,7 @@ describe('identify', function () {
       user_properties: {
         likes_chocolate: true
       },
-      user_id: 'another_user_id',
+      user_id: 'another_user_id'
     }
 
     let mockedRequest = generateMockedRequest(this.identity, 200)
@@ -98,7 +98,7 @@ describe('identify', function () {
       user_properties: {
         likes_chocolate: true
       },
-      device_id: 'another_device_id',
+      device_id: 'another_device_id'
     }
 
     let mockedRequest = generateMockedRequest(this.identity, 200)

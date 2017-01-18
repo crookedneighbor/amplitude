@@ -1,9 +1,10 @@
 'use strict'
 
 const nock = require('nock')
+const sinon = require('sinon')
 const Amplitude = require('../amplitude')
 
-function generateMockedRequest(userSearchId, matches, status) {
+function generateMockedRequest (userSearchId, matches, status) {
   return nock('https://amplitude.com')
     .defaultReplyHeaders({'Content-Type': 'application/json'})
     .get('/api/2/usersearch')
@@ -66,13 +67,13 @@ describe('userSearch', function () {
     expect(() => {
       this.amplitude.userSearch('anything')
     }).to.throw('secretKey must be set to use the userSearch method')
-  });
+  })
 
   it('throws an error if nothing passed', function () {
     expect(() => {
       this.amplitude.userSearch()
     }).to.throw('value to search for must be passed')
-  });
+  })
 
   it('resolves matches found by an amplitude_id', function () {
     let search = '111111111'
@@ -138,9 +139,9 @@ describe('userSearch', function () {
     return this.amplitude.userSearch(search).then((res) => {
       throw new Error('Should not have resolved')
     }).catch((err) => {
-      expect(err.status).to.eql(403);
-      expect(err.message).to.eql('Forbidden');
+      expect(err.status).to.eql(403)
+      expect(err.message).to.eql('Forbidden')
       mockedRequest.done()
-    });
+    })
   })
 })

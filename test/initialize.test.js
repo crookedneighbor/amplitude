@@ -5,7 +5,7 @@ let Amplitude = require('../amplitude')
 describe('initialization', () => {
   it('throws an error if no api token is passed', () => {
     expect(() => {
-      let amplitude = new Amplitude()
+      let amplitude = new Amplitude() // eslint-disable-line
     }).to.throw('No token provided')
   })
 

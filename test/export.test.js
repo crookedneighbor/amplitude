@@ -34,7 +34,7 @@ describe('export', function () {
     expect(() => {
       this.amplitude.export(this.options)
     }).to.throw('secretKey must be set to use the export method')
-  });
+  })
 
   it('throws an error if start param is missing', function () {
     delete this.options.start
@@ -42,7 +42,7 @@ describe('export', function () {
     expect(() => {
       this.amplitude.export(this.options)
     }).to.throw('`start` and `end` are required options')
-  });
+  })
 
   it('throws an error if end param is missing', function () {
     delete this.options.end
@@ -50,7 +50,7 @@ describe('export', function () {
     expect(() => {
       this.amplitude.export(this.options)
     }).to.throw('`start` and `end` are required options')
-  });
+  })
 
   it('resolves a zip when succesful', function () {
     let mockedRequest = generateMockedRequest(this.options, 200)
@@ -69,9 +69,9 @@ describe('export', function () {
     return this.amplitude.export(this.options).then((res) => {
       throw new Error('Should not have resolved')
     }).catch((err) => {
-      expect(err.status).to.eql(403);
-      expect(err.message).to.eql('Forbidden');
+      expect(err.status).to.eql(403)
+      expect(err.message).to.eql('Forbidden')
       mockedRequest.done()
-    });
+    })
   })
 })

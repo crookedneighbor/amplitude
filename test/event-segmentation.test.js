@@ -32,10 +32,11 @@ describe('eventSegmentation', function () {
     this.response = {
       series: [ [ 2, 25, 3 ] ],
       seriesLabels: [ 0 ],
-      xValues:
-        [ '2017-01-15',
-          '2017-01-16',
-          '2017-01-17' ]
+      xValues: [
+        '2017-01-15',
+        '2017-01-16',
+        '2017-01-17'
+      ]
     }
   })
 
@@ -45,13 +46,13 @@ describe('eventSegmentation', function () {
     expect(() => {
       this.amplitude.eventSegmentation(this.data)
     }).to.throw('secretKey must be set to use the eventSegmentation method')
-  });
+  })
 
   it('throws an error if no data is passed in', function () {
     expect(() => {
       this.amplitude.eventSegmentation()
     }).to.throw('`e`, `start` and `end` are required data properties')
-  });
+  })
 
   it('throws an error if e param is missing', function () {
     delete this.data.e
@@ -59,7 +60,7 @@ describe('eventSegmentation', function () {
     expect(() => {
       this.amplitude.eventSegmentation(this.data)
     }).to.throw('`e`, `start` and `end` are required data properties')
-  });
+  })
 
   it('throws an error if start param is missing', function () {
     delete this.data.start
@@ -67,7 +68,7 @@ describe('eventSegmentation', function () {
     expect(() => {
       this.amplitude.eventSegmentation(this.data)
     }).to.throw('`e`, `start` and `end` are required data properties')
-  });
+  })
 
   it('throws an error if end param is missing', function () {
     delete this.data.end
@@ -75,7 +76,7 @@ describe('eventSegmentation', function () {
     expect(() => {
       this.amplitude.eventSegmentation(this.data)
     }).to.throw('`e`, `start` and `end` are required data properties')
-  });
+  })
 
   it('rejects with error 400 when segmentation event does not exist', function () {
     this.data.e.event_type = 'event_no_exist'
@@ -84,10 +85,10 @@ describe('eventSegmentation', function () {
     return this.amplitude.eventSegmentation(this.data).then((res) => {
       throw new Error('Should not have resolved')
     }).catch((err) => {
-      expect(err.status).to.eql(400);
+      expect(err.status).to.eql(400)
       mockedRequest.done()
-    });
-  });
+    })
+  })
 
   it('resolves with series and xValues if the segmentation event is found', function () {
     let mockedRequest = generateMockedRequest(this.data, this.response, 200)

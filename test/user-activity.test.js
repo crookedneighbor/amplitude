@@ -3,9 +3,10 @@
 const nock = require('nock')
 const Amplitude = require('../amplitude')
 
-function generateMockedRequest(userSearchId, matches, status) {
+function generateMockedRequest (userSearchId, matches, status) {
   let query = {user: userSearchId}
-  if(typeof userSearchId === 'object') {
+
+  if (typeof userSearchId === 'object') {
     query = userSearchId
   }
   return nock('https://amplitude.com')
@@ -44,7 +45,7 @@ describe('userActivity', function () {
           'library': 'amplitude-js/3.3.2',
           'first_used': '2016-11-09',
           'properties': {
-            'custom_user_prop': 'something',
+            'custom_user_prop': 'something'
           },
           'canonical_amplitude_id': 11111111,
           'dma': 'Austin, TX',
@@ -67,11 +68,11 @@ describe('userActivity', function () {
         },
         'events': [
           {
-            "event_type": "some_event",
-            "app": 123456,
-            "library": "amplitude-js/3.3.2",
-            "device_type": "Mac",
-            "device_carrier": null,
+            'event_type': 'some_event',
+            'app': 123456,
+            'library': 'amplitude-js/3.3.2',
+            'device_type': 'Mac',
+            'device_carrier': null,
             'event_properties': {
               'some': 'thing'
             },
@@ -106,13 +107,13 @@ describe('userActivity', function () {
     expect(() => {
       this.amplitude.userActivity('anything')
     }).to.throw('secretKey must be set to use the userActivity method')
-  });
+  })
 
   it('throws an error if nothing passed', function () {
     expect(() => {
       this.amplitude.userActivity()
     }).to.throw('Amplitude ID must be passed')
-  });
+  })
 
   it('resolves user data and list of events when passed an existing Amplitude ID', function () {
     let amplitudeId = 11111111
@@ -157,9 +158,9 @@ describe('userActivity', function () {
     return this.amplitude.userActivity(search).then((res) => {
       throw new Error('Should not have resolved')
     }).catch((err) => {
-      expect(err.status).to.eql(403);
-      expect(err.message).to.eql('Forbidden');
+      expect(err.status).to.eql(403)
+      expect(err.message).to.eql('Forbidden')
       mockedRequest.done()
-    });
+    })
   })
 })
