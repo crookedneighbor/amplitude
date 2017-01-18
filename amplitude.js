@@ -148,7 +148,7 @@ Amplitude.prototype.eventSegmentation = function (data) {
     throw new Error('secretKey must be set to use the eventSegmentation method')
   }
 
-  if (!data.e || !data.start || !data.end) {
+  if (!data || !data.e || !data.start || !data.end) {
     throw new Error('`e`, `start` and `end` are required data properties')
   }
 

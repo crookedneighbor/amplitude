@@ -47,6 +47,12 @@ describe('eventSegmentation', function () {
     }).to.throw('secretKey must be set to use the eventSegmentation method')
   });
 
+  it('throws an error if no data is passed in', function () {
+    expect(() => {
+      this.amplitude.eventSegmentation()
+    }).to.throw('`e`, `start` and `end` are required data properties')
+  });
+
   it('throws an error if e param is missing', function () {
     delete this.data.e
 
