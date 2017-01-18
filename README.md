@@ -243,8 +243,7 @@ amplitude.eventSegmentation({
 Example response:
 
 ```javascript
-{
-  { series: [ [ 2, 25, 3, 1, 0, 0, 2, 3, 5, 1, 0, 0, 0, 0 ] ],
+{ series: [ [ 2, 25, 3, 1, 0, 0, 2, 3, 5, 1, 0, 0, 0, 0 ] ],
   seriesLabels: [ 0 ],
   xValues: 
    [ '2017-01-04',
@@ -261,7 +260,6 @@ Example response:
      '2017-01-15',
      '2017-01-16',
      '2017-01-17' ] }
-}
 ```
 
 If the event does not exist, Amplitude will throw a 400 error.
