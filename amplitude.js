@@ -59,12 +59,20 @@ Amplitude.prototype._generateRequestData = function (data) {
 Amplitude.prototype.identify = function (data) {
   var transformedData = this._generateRequestData(data)
 
+  var params = {
+    api_key: this.token,
+    identification: JSON.stringify(transformedData)
+  }
+
+  var encodedParams = Object.keys(params).map(function (key) {
+    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+  }).join('&')
+
   return request.post(AMPLITUDE_TOKEN_ENDPOINT + '/identify')
+    .send(encodedParams)
+    .type('application/x-www-form-urlencoded')
     .set('Accept', 'application/json')
-    .query({
-      api_key: this.token,
-      identification: JSON.stringify(transformedData)
-    }).then(function (res) {
+    .then(function (res) {
       return res.body
     })
 }
