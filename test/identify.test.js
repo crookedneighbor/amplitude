@@ -123,4 +123,49 @@ describe('identify', function () {
         mockedRequest.done()
       })
   })
+
+  it('can accept an array of identity objects', function () {
+    this.identity = [{
+      city: 'Brooklyn',
+      paying: false,
+      user_properties: {
+        likes_chocolate: true
+      },
+      user_id: 'unique_user_id',
+      device_id: 'unique_device_id'
+    },
+    {
+      city: 'Brooklyn',
+      paying: false,
+      user_properties: {
+        likes_chocolate: true
+      },
+      user_id: 'unique_user_id',
+      device_id: 'unique_device_id'
+    }]
+
+    this.data = [{
+      city: 'Brooklyn',
+      paying: false,
+      user_properties: {
+        likes_chocolate: true
+      }
+    },
+    {
+      city: 'Brooklyn',
+      paying: false,
+      user_properties: {
+        likes_chocolate: true
+      }
+    }]
+
+    let mockedRequest = generateMockedRequest(this.identity, 200)
+
+    return this.amplitude.identify(this.data).then((res) => {
+      expect(res).to.eql({ some: 'data' })
+      mockedRequest.done()
+    }).catch((err) => {
+      expect(err).to.not.exist
+    })
+  })
 })
