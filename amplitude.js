@@ -58,44 +58,22 @@ Amplitude.prototype._generateRequestData = function (data) {
 
 Amplitude.prototype.identify = function (data) {
   var transformedData = this._generateRequestData(data)
-
   var params = {
     api_key: this.token,
     identification: JSON.stringify(transformedData)
   }
 
-  var encodedParams = Object.keys(params).map(function (key) {
-    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
-  }).join('&')
-
-  return request.post(AMPLITUDE_TOKEN_ENDPOINT + '/identify')
-    .send(encodedParams)
-    .type('application/x-www-form-urlencoded')
-    .set('Accept', 'application/json')
-    .then(function (res) {
-      return res.body
-    })
+  return postBody(AMPLITUDE_TOKEN_ENDPOINT + '/identify', params)
 }
 
 Amplitude.prototype.track = function (data) {
   var transformedData = this._generateRequestData(data)
-
   var params = {
     api_key: this.token,
     event: JSON.stringify(transformedData)
   }
 
-  var encodedParams = Object.keys(params).map(function (key) {
-    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
-  }).join('&')
-
-  return request.post(AMPLITUDE_TOKEN_ENDPOINT + '/httpapi')
-    .send(encodedParams)
-    .type('application/x-www-form-urlencoded')
-    .set('Accept', 'application/json')
-    .then(function (res) {
-      return res.body
-    })
+  return postBody(AMPLITUDE_TOKEN_ENDPOINT + '/httpapi', params)
 }
 
 Amplitude.prototype.export = function (options) {
@@ -174,6 +152,20 @@ Amplitude.prototype.eventSegmentation = function (data) {
   return request.get(AMPLITUDE_DASHBOARD_ENDPOINT + '/events/segmentation')
     .auth(this.token, this.secretKey)
     .query(data)
+    .set('Accept', 'application/json')
+    .then(function (res) {
+      return res.body
+    })
+}
+
+function postBody (url, params) {
+  var encodedParams = Object.keys(params).map(function (key) {
+    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+  }).join('&')
+
+  return request.post(url)
+    .send(encodedParams)
+    .type('application/x-www-form-urlencoded')
     .set('Accept', 'application/json')
     .then(function (res) {
       return res.body
