@@ -63,7 +63,7 @@ var data = [
     }
   }
 ]
-amplitude.identify(data)
+amplitude.track(data)
 ```
 
 ## Identify API
