@@ -37,13 +37,41 @@ var data = {
 amplitude.track(data)
 ```
 
+You can also pass an array of `event` objects:
+```javascript
+var data = [
+  {
+    event_type: 'some value', // required
+    user_id: 'some id', // only required if device id is not passed in
+    device_id: 'some id', // only required if user id is not passed in
+    event_properties: {
+      //...
+    },
+    user_properties: {
+      //...
+    }
+  },
+  {
+    event_type: 'another value', // required
+    user_id: 'some id', // only required if device id is not passed in
+    device_id: 'some id', // only required if user id is not passed in
+    event_properties: {
+      //...
+    },
+    user_properties: {
+      //...
+    }
+  }
+]
+amplitude.identify(data)
+```
+
 ## Identify API
 
 The `identify` method allows you to [make changes to a user without sending an analytics event](https://amplitude.zendesk.com/hc/en-us/articles/205406617). 
 
 ```javascript
 var data = {
-  event_type: 'some value', // required
   user_id: 'some id', // only required if device id is not passed in
   device_id: 'some id', // only required if user id is not passed in
   event_properties: {
@@ -53,6 +81,33 @@ var data = {
     //...
   }
 }
+amplitude.identify(data)
+```
+
+You can also pass an array of `identify` objects:
+```javascript
+var data = [
+  {
+    user_id: 'some id', // only required if device id is not passed in
+    device_id: 'some id', // only required if user id is not passed in
+    event_properties: {
+      //...
+    },
+    user_properties: {
+      //...
+    }
+  },
+  {
+    user_id: 'some id', // only required if device id is not passed in
+    device_id: 'some id', // only required if user id is not passed in
+    event_properties: {
+      //...
+    },
+    user_properties: {
+      //...
+    }
+  }
+]
 amplitude.identify(data)
 ```
 

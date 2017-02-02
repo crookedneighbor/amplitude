@@ -132,4 +132,15 @@ describe('track', function () {
         mockedRequest.done()
       })
   })
+
+  it('can accept an array of event objects', function () {
+    let mockedRequest = generateMockedRequest([this.event], 200)
+
+    return this.amplitude.track([this.data]).then((res) => {
+      expect(res).to.eql({ some: 'data' })
+      mockedRequest.done()
+    }).catch((err) => {
+      expect(err).to.not.exist
+    })
+  })
 })

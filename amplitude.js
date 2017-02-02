@@ -35,18 +35,25 @@ function Amplitude (token, options) {
 }
 
 Amplitude.prototype._generateRequestData = function (data) {
-  var transformedData = Object.keys(data).reduce(function (obj, key) {
-    var transformedKey = camelCaseToSnakeCasePropertyMap[key] || key
+  var passedDataIsArray = Array.isArray(data)
+  var arrayedData = passedDataIsArray ? data : [data]
 
-    obj[transformedKey] = data[key]
+  var transformedDataArray = arrayedData.map(function (item) {
+    var transformedData = Object.keys(item).reduce(function (obj, key) {
+      var transformedKey = camelCaseToSnakeCasePropertyMap[key] || key
 
-    return obj
-  }, {})
+      obj[transformedKey] = item[key]
 
-  transformedData.user_id = transformedData.user_id || this.userId
-  transformedData.device_id = transformedData.device_id || this.deviceId
+      return obj
+    }, {})
 
-  return transformedData
+    transformedData.user_id = transformedData.user_id || this.userId
+    transformedData.device_id = transformedData.device_id || this.deviceId
+
+    return transformedData
+  }, this)
+
+  return passedDataIsArray ? transformedDataArray : transformedDataArray[0]
 }
 
 Amplitude.prototype.identify = function (data) {
