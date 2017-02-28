@@ -59,7 +59,7 @@
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "snazzy": "^6.0.0",
-    "standard": "^8.0.0"
+    "standard": "^9.0.0"
   },
   "license": "ISC",
   "standard": {
