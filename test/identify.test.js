@@ -49,7 +49,7 @@ describe('identify', function () {
       expect(res).to.eql({ some: 'data' })
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -78,7 +78,7 @@ describe('identify', function () {
       expect(res).to.eql({ some: 'data' })
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -107,7 +107,7 @@ describe('identify', function () {
       expect(res).to.eql({ some: 'data' })
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -165,7 +165,7 @@ describe('identify', function () {
       expect(res).to.eql({ some: 'data' })
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 })

@@ -83,10 +83,10 @@ describe('userSearch', function () {
       expect(res.matches).to.be.a('array')
       expect(res.matches.length).to.eql(1)
       expect(res.type).to.eql('match_amplitude_id')
-      expect(this.userActivityStub).to.not.be.called
+      expect(this.userActivityStub).to.not.be.called // eslint-disable-line
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -100,7 +100,7 @@ describe('userSearch', function () {
       expect(res.type).to.eql('match_user_props')
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -114,7 +114,7 @@ describe('userSearch', function () {
       expect(res.type).to.eql('match_user_or_device_id')
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -128,7 +128,7 @@ describe('userSearch', function () {
       expect(res.type).to.eql('nomatch')
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 

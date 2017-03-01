@@ -41,7 +41,7 @@ describe('track', function () {
       expect(res).to.eql({ some: 'data' })
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -82,7 +82,7 @@ describe('track', function () {
       expect(res).to.eql({ some: 'data' })
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -99,7 +99,7 @@ describe('track', function () {
       expect(res).to.eql({ some: 'data' })
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -116,7 +116,7 @@ describe('track', function () {
       expect(res).to.eql({ some: 'data' })
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -140,7 +140,7 @@ describe('track', function () {
       expect(res).to.eql({ some: 'data' })
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 })

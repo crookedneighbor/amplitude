@@ -97,7 +97,7 @@ describe('eventSegmentation', function () {
       expect(res).to.eql(this.response)
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 })

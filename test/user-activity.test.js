@@ -123,7 +123,7 @@ describe('userActivity', function () {
       expect(res.type).to.eql(this.userSearchIds.found_by_user_props)
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -135,7 +135,7 @@ describe('userActivity', function () {
       expect(res).to.eql(this.userSearchIds.found)
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
@@ -147,7 +147,7 @@ describe('userActivity', function () {
       expect(res).to.eql(this.userSearchIds.not_found)
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 

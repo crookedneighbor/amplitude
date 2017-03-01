@@ -59,7 +59,7 @@ describe('export', function () {
       expect(data.res.headers['content-type']).to.eql('application/zip')
       mockedRequest.done()
     }).catch((err) => {
-      expect(err).to.not.exist
+      expect(err).to.equal(undefined)
     })
   })
 
