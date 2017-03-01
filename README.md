@@ -1,5 +1,7 @@
 # amplitude
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/crookedneighbor/amplitude.svg)](https://greenkeeper.io/)
+
 ![Build Status](https://travis-ci.org/crookedneighbor/amplitude.svg?branch=master) ![npm version](https://badge.fury.io/js/amplitude.svg)
 
 Server side implimentation of [Amplitude](https://amplitude.com)'s http api.
