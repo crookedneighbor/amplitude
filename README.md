@@ -137,7 +137,7 @@ This is the full list of properties that will be automatically transformed:
 ```
 userId -> user_id
 deviceId -> device_id
-deviceId -> session_id
+sessionId -> session_id
 eventType -> event_type
 eventProperties -> event_properties
 userProperties -> user_properties
@@ -151,7 +151,7 @@ locationLat -> location_lat
 locationLng -> location_lng
 ```
 
-### User/Device ID
+### User/Device/Session ID
 
 If the user/device/session id will always be the same, you can initialize the object with it. Passing a user id or device id in the `track` and `identify` methods will override the default value set at initialization.
 
