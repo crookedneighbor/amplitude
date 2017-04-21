@@ -27,6 +27,7 @@ var data = {
   event_type: 'some value', // required
   user_id: 'some id', // only required if device id is not passed in
   device_id: 'some id', // only required if user id is not passed in
+  session_id: 1492789357923, // must be unix timestamp in ms, not required
   event_properties: {
     //...
   },
@@ -120,6 +121,7 @@ var data = {
   eventType: 'some value', // required
   userId: 'some id', // only required if device id is not passed in
   deviceId: 'some id', // only required if user id is not passed in
+  sessionId: 1492789357923, // must be unix timestamp in ms, not required
   eventProperties: {
     //...
   },
@@ -135,6 +137,7 @@ This is the full list of properties that will be automatically transformed:
 ```
 userId -> user_id
 deviceId -> device_id
+deviceId -> session_id
 eventType -> event_type
 eventProperties -> event_properties
 userProperties -> user_properties
@@ -150,12 +153,14 @@ locationLng -> location_lng
 
 ### User/Device ID
 
-If the user/device id will always be the same, you can initialize the object with it. Passing a user id or device id in the `track` and `identify` methods will override the default value set at initialization.
+If the user/device/session id will always be the same, you can initialize the object with it. Passing a user id or device id in the `track` and `identify` methods will override the default value set at initialization.
 
 ```javascript
 var amplitude = new Amplitude('api-token', { user_id: 'some-user-id' })
 // or
 var amplitude = new Amplitude('api-token', { device_id: 'some-device-id' })
+// or
+var amplitude = new Amplitude('api-token', { session_id: 1492789357923 })
 
 amplitude.track({
   event_type: 'some value'
@@ -333,3 +338,4 @@ Do not change anything below this comment. It is generated automatically.
 + [Matthew Keesan](http://keesan.net)
 + [Geoff Dutton](undefined)
 + [Matt Pardee](undefined)
++ [Chase Seibert](http://chase-seibert.github.io/blog/)
