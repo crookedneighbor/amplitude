@@ -2,7 +2,7 @@
 
 ![Build Status](https://travis-ci.org/crookedneighbor/amplitude.svg?branch=master) ![npm version](https://badge.fury.io/js/amplitude.svg)
 
-Server side implimentation of [Amplitude](https://amplitude.com)'s http api.
+Server side implementation of [Amplitude](https://amplitude.com)'s http api.
 
 ## Install
 
