@@ -56,4 +56,22 @@ describe('initialization', () => {
 
     expect(amplitude.secretKey).to.eql('secret')
   })
+
+  it('sets sessionId when specified', () => {
+    let amplitude = new Amplitude('token', { sessionId: 'db_session_id' })
+
+    expect(amplitude.sessionId).to.eql('db_session_id')
+  })
+
+  it('can use session_id to set sessionId', () => {
+    let amplitude = new Amplitude('token', { session_id: 'db_session_id' })
+
+    expect(amplitude.sessionId).to.eql('db_session_id')
+  })
+
+  it('prefers sessionId over session_id to set sessionId', () => {
+    let amplitude = new Amplitude('token', { sessionId: 'sessionId', session_id: 'session_id' })
+
+    expect(amplitude.sessionId).to.eql('sessionId')
+  })
 })
