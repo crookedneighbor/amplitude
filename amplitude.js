@@ -33,7 +33,7 @@ function Amplitude (token, options) {
   this.secretKey = options.secretKey
   this.userId = options.userId || options.user_id
   this.deviceId = options.deviceId || options.device_id
-  this.sessionId = options.sessionId || options.sessionId
+  this.sessionId = options.sessionId || options.session_id
 }
 
 Amplitude.prototype._generateRequestData = function (data) {
