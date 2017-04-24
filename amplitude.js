@@ -8,6 +8,7 @@ var AMPLITUDE_DASHBOARD_ENDPOINT = 'https://amplitude.com/api/2'
 var camelCaseToSnakeCasePropertyMap = Object.freeze({
   userId: 'user_id',
   deviceId: 'device_id',
+  sessionId: 'session_id',
   eventType: 'event_type',
   eventProperties: 'event_properties',
   userProperties: 'user_properties',
@@ -32,6 +33,7 @@ function Amplitude (token, options) {
   this.secretKey = options.secretKey
   this.userId = options.userId || options.user_id
   this.deviceId = options.deviceId || options.device_id
+  this.sessionId = options.sessionId || options.session_id
 }
 
 Amplitude.prototype._generateRequestData = function (data) {
@@ -49,6 +51,7 @@ Amplitude.prototype._generateRequestData = function (data) {
 
     transformedData.user_id = transformedData.user_id || this.userId
     transformedData.device_id = transformedData.device_id || this.deviceId
+    transformedData.session_id = transformedData.session_id || this.sessionId
 
     return transformedData
   }, this)
