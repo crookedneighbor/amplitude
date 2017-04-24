@@ -17,7 +17,11 @@ function getContributorText() {
   let contributors = Object.keys(PKG.contributors).map(con => PKG.contributors[con])
 
   contributors.forEach((contributor) => {
-    text += `+ [${contributor.name}](${contributor.url})\n`
+    if (contributor.url) {
+      text += `+ [${contributor.name}](${contributor.url})\n`
+    } else {
+      text += `+ ${contributor.name}\n`
+    }
   });
 
   return text

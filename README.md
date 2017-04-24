@@ -336,6 +336,6 @@ Do not change anything below this comment. It is generated automatically.
 
 + [Erki Esken](http://deekit.net/)
 + [Matthew Keesan](http://keesan.net)
-+ [Geoff Dutton](undefined)
-+ [Matt Pardee](undefined)
++ Geoff Dutton
++ Matt Pardee
 + [Chase Seibert](http://chase-seibert.github.io/blog/)
