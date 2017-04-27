@@ -59,7 +59,7 @@
     "ecmascript-version-detector": "^1.0.3",
     "glob": "^7.1.1",
     "mocha": "^3.0.0",
-    "nock": "9.0.2",
+    "nock": "9.0.10",
     "publish-please": "^2.1.4",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
