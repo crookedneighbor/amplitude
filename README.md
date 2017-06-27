@@ -112,6 +112,29 @@ var data = [
 amplitude.identify(data)
 ```
 
+With this method, you can also [modify user properties using property operations](https://amplitude.zendesk.com/hc/en-us/articles/205406617-Identify-API-Modify-User-Properties#keys-for-the-identification-argument). 
+
+```javascript
+var data = {
+  user_id: 'some id', // only required if device id is not passed in
+  device_id: 'some id', // only required if user id is not passed in
+  user_properties: {
+    $set: {
+      //...
+    },
+    $add: {
+      //...
+    },
+    $append: {
+      //...
+    }
+  }
+};
+amplitude.identify(data);
+```
+
+Note the limitation of mixing user property operations with top level properties. If you use any property operations (`$add`, `$append`, etc.), and you want to set a user property, it must be done using the `$set` operation.
+
 ### CamelCase Data
 
 If you prefer camelCase variables, you can pass in the camelCase version instead to the `track` and `identify` methods:
