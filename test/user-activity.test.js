@@ -4,13 +4,13 @@ const nock = require('nock')
 const Amplitude = require('../amplitude')
 
 function generateMockedRequest (userSearchId, matches, status) {
-  let query = {user: userSearchId}
+  let query = { user: userSearchId }
 
   if (typeof userSearchId === 'object') {
     query = userSearchId
   }
   return nock('https://amplitude.com')
-    .defaultReplyHeaders({'Content-Type': 'application/json'})
+    .defaultReplyHeaders({ 'Content-Type': 'application/json' })
     .get('/api/2/useractivity')
     .query(query)
     .basicAuth({
@@ -129,9 +129,9 @@ describe('userActivity', function () {
 
   it('should accept `limit` and `offset` as query params ', function () {
     let search = 'cant-find-me'
-    let mockedRequest = generateMockedRequest({user: search, limit: 0}, this.userSearchIds.found, 200)
+    let mockedRequest = generateMockedRequest({ user: search, limit: 0 }, this.userSearchIds.found, 200)
 
-    return this.amplitude.userActivity(search, {limit: 0}).then((res) => {
+    return this.amplitude.userActivity(search, { limit: 0 }).then((res) => {
       expect(res).to.eql(this.userSearchIds.found)
       mockedRequest.done()
     }).catch((err) => {

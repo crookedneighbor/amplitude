@@ -7,7 +7,7 @@ function generateMockedRequest (query, response, status) {
   query.e = JSON.stringify(query.e)
 
   return nock('https://amplitude.com')
-    .defaultReplyHeaders({'Content-Type': 'application/json'})
+    .defaultReplyHeaders({ 'Content-Type': 'application/json' })
     .get('/api/2/events/segmentation')
     .query(query)
     .basicAuth({

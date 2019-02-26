@@ -6,7 +6,7 @@ const Amplitude = require('../amplitude')
 
 function generateMockedRequest (userSearchId, matches, status) {
   return nock('https://amplitude.com')
-    .defaultReplyHeaders({'Content-Type': 'application/json'})
+    .defaultReplyHeaders({ 'Content-Type': 'application/json' })
     .get('/api/2/usersearch')
     .query({
       user: userSearchId
