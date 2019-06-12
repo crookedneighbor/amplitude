@@ -58,7 +58,7 @@
     "chai": "^4.1.0",
     "ecmascript-version-detector": "^1.0.3",
     "glob": "^7.1.1",
-    "mocha": "^6.1.3",
+    "mocha": "^6.1.4",
     "nock": "9.0.2",
     "publish-please": "^5.4.3",
     "sinon": "^7.3.1",
