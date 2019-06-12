@@ -5,12 +5,7 @@ const Amplitude = require('../amplitude')
 
 function generateMockedRequest (identity, status) {
   let mockedRequest = nock('https://api.amplitude.com')
-    .defaultReplyHeaders({ 'Content-Type': 'application/json' })
     .post('/identify')
-    .query({
-      api_key: 'token',
-      identification: JSON.stringify(identity)
-    })
     .reply(status, { some: 'data' })
 
   return mockedRequest

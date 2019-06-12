@@ -10,7 +10,6 @@ function generateMockedRequest (userSearchId, matches, status) {
     query = userSearchId
   }
   return nock('https://amplitude.com')
-    .defaultReplyHeaders({ 'Content-Type': 'application/json' })
     .get('/api/2/useractivity')
     .query(query)
     .basicAuth({
