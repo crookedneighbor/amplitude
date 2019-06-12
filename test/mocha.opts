@@ -3,5 +3,4 @@
 --timeout 8000
 --growl
 --check-leaks
---require ./test/helpers/globals
 --recursive

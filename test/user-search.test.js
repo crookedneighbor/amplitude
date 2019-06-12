@@ -1,7 +1,6 @@
 'use strict'
 
 const nock = require('nock')
-const sinon = require('sinon')
 const Amplitude = require('../amplitude')
 
 function generateMockedRequest (userSearchId, matches, status) {
@@ -24,7 +23,7 @@ describe('userSearch', function () {
       secretKey: 'key'
     })
 
-    this.userActivityStub = sinon.stub(this.amplitude, 'userActivity')
+    this.userActivityStub = this.sandbox.stub(this.amplitude, 'userActivity')
 
     this.userSearchIds = {
       found_by_amplitude_id: {
