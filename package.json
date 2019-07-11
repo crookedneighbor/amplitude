@@ -64,7 +64,7 @@
     "sinon": "^7.3.2",
     "sinon-chai": "^3.0.0",
     "snazzy": "^8.0.0",
-    "standard": "^12.0.1"
+    "standard": "^13.0.1"
   },
   "license": "ISC",
   "standard": {
