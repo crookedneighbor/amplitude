@@ -4,7 +4,7 @@ const nock = require('nock')
 const Amplitude = require('../amplitude')
 
 function generateMockedRequest (identity, status) {
-  let mockedRequest = nock('https://api.amplitude.com')
+  const mockedRequest = nock('https://api.amplitude.com')
     .post('/identify')
     .reply(status, { some: 'data' })
 
@@ -38,7 +38,7 @@ describe('identify', function () {
   })
 
   it('resolves when the request succeeds', function () {
-    let mockedRequest = generateMockedRequest(this.identity, 200)
+    const mockedRequest = generateMockedRequest(this.identity, 200)
 
     return this.amplitude.identify(this.data).then((res) => {
       expect(res).to.eql({ some: 'data' })
@@ -67,7 +67,7 @@ describe('identify', function () {
       user_id: 'another_user_id'
     }
 
-    let mockedRequest = generateMockedRequest(this.identity, 200)
+    const mockedRequest = generateMockedRequest(this.identity, 200)
 
     return this.amplitude.identify(this.data).then((res) => {
       expect(res).to.eql({ some: 'data' })
@@ -96,7 +96,7 @@ describe('identify', function () {
       device_id: 'another_device_id'
     }
 
-    let mockedRequest = generateMockedRequest(this.identity, 200)
+    const mockedRequest = generateMockedRequest(this.identity, 200)
 
     return this.amplitude.identify(this.data).then((res) => {
       expect(res).to.eql({ some: 'data' })
@@ -107,7 +107,7 @@ describe('identify', function () {
   })
 
   it('rejects when the request fails', function () {
-    let mockedRequest = generateMockedRequest(this.identity, 500)
+    const mockedRequest = generateMockedRequest(this.identity, 500)
 
     return this.amplitude.identify(this.data)
       .then((res) => {
@@ -154,7 +154,7 @@ describe('identify', function () {
       }
     }]
 
-    let mockedRequest = generateMockedRequest(this.identity, 200)
+    const mockedRequest = generateMockedRequest(this.identity, 200)
 
     return this.amplitude.identify(this.data).then((res) => {
       expect(res).to.eql({ some: 'data' })

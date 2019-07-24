@@ -29,8 +29,8 @@ describe('eventSegmentation', function () {
       end: '20160525T20'
     }
     this.response = {
-      series: [ [ 2, 25, 3 ] ],
-      seriesLabels: [ 0 ],
+      series: [[2, 25, 3]],
+      seriesLabels: [0],
       xValues: [
         '2017-01-15',
         '2017-01-16',
@@ -79,7 +79,7 @@ describe('eventSegmentation', function () {
 
   it('rejects with error 400 when segmentation event does not exist', function () {
     this.data.e.event_type = 'event_no_exist'
-    let mockedRequest = generateMockedRequest(this.data, null, 400)
+    const mockedRequest = generateMockedRequest(this.data, null, 400)
 
     return this.amplitude.eventSegmentation(this.data).then((res) => {
       throw new Error('Should not have resolved')
@@ -90,7 +90,7 @@ describe('eventSegmentation', function () {
   })
 
   it('resolves with series and xValues if the segmentation event is found', function () {
-    let mockedRequest = generateMockedRequest(this.data, this.response, 200)
+    const mockedRequest = generateMockedRequest(this.data, this.response, 200)
 
     return this.amplitude.eventSegmentation(this.data).then((res) => {
       expect(res).to.eql(this.response)

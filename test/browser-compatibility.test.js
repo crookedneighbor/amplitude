@@ -20,20 +20,20 @@ describe('ES5 Compatibility', function () {
           return
         }
 
-        let errors = []
+        const errors = []
 
         parseEcmascriptVersion(data).forEach((expression) => {
           if (expression.selector === "//Program[@sourceType=='module']") {
             return
           }
 
-          let expressionVersion = parseInt(expression.version, 10)
+          const expressionVersion = parseInt(expression.version, 10)
 
           try {
             expect(expressionVersion).to.be.at.most(5)
           } catch (err) {
-            let node = expression.node
-            let lineNumber = node.loc.start.line
+            const node = expression.node
+            const lineNumber = node.loc.start.line
 
             errors.push(`Found ES${expressionVersion} code (${node.type}) in ${file}:${lineNumber}`)
           }

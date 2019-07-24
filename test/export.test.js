@@ -4,7 +4,7 @@ const Amplitude = require('../amplitude')
 const nock = require('nock')
 
 function generateMockedRequest (query, status) {
-  let mockedRequest = nock('https://amplitude.com')
+  const mockedRequest = nock('https://amplitude.com')
     .defaultReplyHeaders({ 'Content-Type': 'application/zip' })
     .get('/api/2/export')
     .query(query)
@@ -53,7 +53,7 @@ describe('export', function () {
   })
 
   it('resolves a zip when succesful', function () {
-    let mockedRequest = generateMockedRequest(this.options, 200)
+    const mockedRequest = generateMockedRequest(this.options, 200)
 
     return this.amplitude.export(this.options).then((data) => {
       expect(data.res.headers['content-type']).to.eql('application/zip')
@@ -64,7 +64,7 @@ describe('export', function () {
   })
 
   it('rejects with error when unsuccesful', function () {
-    let mockedRequest = generateMockedRequest(this.options, 403)
+    const mockedRequest = generateMockedRequest(this.options, 403)
 
     return this.amplitude.export(this.options).then((res) => {
       throw new Error('Should not have resolved')

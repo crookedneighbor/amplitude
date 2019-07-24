@@ -32,12 +32,9 @@
     }
   ],
   "scripts": {
-    "prepublish-please": "npm test",
-    "prepublish": "publish-please guard",
     "contributors": "node tasks/generate-contributors-list",
     "lint": "standard *.js test/*.js | snazzy",
-    "test": "npm run lint && mocha",
-    "publish-please": "publish-please"
+    "test": "npm run lint && mocha"
   },
   "main": "amplitude.js",
   "repository": {
@@ -52,19 +49,18 @@
     "amplitude"
   ],
   "dependencies": {
-    "superagent": "^5.0.7"
+    "superagent": "^5.1.0"
   },
   "devDependencies": {
     "chai": "^4.1.0",
     "ecmascript-version-detector": "^1.0.3",
     "glob": "^7.1.4",
-    "mocha": "^6.1.4",
+    "mocha": "^6.2.0",
     "nock": "^10.0.6",
-    "publish-please": "^5.4.3",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.0.0",
     "snazzy": "^8.0.0",
-    "standard": "^12.0.1"
+    "standard": "^13.1.0"
   },
   "license": "ISC",
   "standard": {

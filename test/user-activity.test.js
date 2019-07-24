@@ -27,75 +27,75 @@ describe('userActivity', function () {
     this.userSearchIds = {
       // this is an incomplete response
       found: {
-        'userData': {
-          'num_sessions': 3,
-          'purchases': 0,
-          'revenue': 0,
-          'start_version': '',
-          'merged_amplitude_ids': [
+        userData: {
+          num_sessions: 3,
+          purchases: 0,
+          revenue: 0,
+          start_version: '',
+          merged_amplitude_ids: [
             22222222222
           ],
-          'num_events': 18,
-          'ip_address': '1.1.1.1',
-          'last_used': '2016-11-09',
-          'platform': 'Web',
-          'device_type': 'Mac',
-          'device': 'Mac',
-          'library': 'amplitude-js/3.3.2',
-          'first_used': '2016-11-09',
-          'properties': {
-            'custom_user_prop': 'something'
+          num_events: 18,
+          ip_address: '1.1.1.1',
+          last_used: '2016-11-09',
+          platform: 'Web',
+          device_type: 'Mac',
+          device: 'Mac',
+          library: 'amplitude-js/3.3.2',
+          first_used: '2016-11-09',
+          properties: {
+            custom_user_prop: 'something'
           },
-          'canonical_amplitude_id': 11111111,
-          'dma': 'Austin, TX',
-          'paying': '',
-          'city': 'Austin',
-          'user_id': 'blah',
-          'language': 'English',
-          'last_location': null,
-          'country': 'United States',
-          'region': 'Texas',
-          'usage_time': 1273334,
-          'version': '',
-          'last_device_id': '11111111111-1111-1111-1111-1111111111',
-          'carrier': '',
-          'device_ids': [
+          canonical_amplitude_id: 11111111,
+          dma: 'Austin, TX',
+          paying: '',
+          city: 'Austin',
+          user_id: 'blah',
+          language: 'English',
+          last_location: null,
+          country: 'United States',
+          region: 'Texas',
+          usage_time: 1273334,
+          version: '',
+          last_device_id: '11111111111-1111-1111-1111-1111111111',
+          carrier: '',
+          device_ids: [
             '11111111111-1111-1111-1111-1111111111',
             '21111111111-1111-1111-1111-1111111111'
           ],
-          'os': 'Chrome 54'
+          os: 'Chrome 54'
         },
-        'events': [
+        events: [
           {
-            'event_type': 'some_event',
-            'app': 123456,
-            'library': 'amplitude-js/3.3.2',
-            'device_type': 'Mac',
-            'device_carrier': null,
-            'event_properties': {
-              'some': 'thing'
+            event_type: 'some_event',
+            app: 123456,
+            library: 'amplitude-js/3.3.2',
+            device_type: 'Mac',
+            device_carrier: null,
+            event_properties: {
+              some: 'thing'
             },
-            'user_properties': {
-              'custom_user_prop': 'something'
+            user_properties: {
+              custom_user_prop: 'something'
             }
           }
         ]
       },
       not_found: {
-        'userData': {
-          'num_sessions': 0,
-          'purchases': 0,
-          'revenue': 0,
-          'merged_amplitude_ids': [],
-          'num_events': 0,
-          'canonical_amplitude_id': 1,
-          'user_id': null,
-          'last_location': null,
-          'usage_time': 0,
-          'last_device_id': null,
-          'device_ids': []
+        userData: {
+          num_sessions: 0,
+          purchases: 0,
+          revenue: 0,
+          merged_amplitude_ids: [],
+          num_events: 0,
+          canonical_amplitude_id: 1,
+          user_id: null,
+          last_location: null,
+          usage_time: 0,
+          last_device_id: null,
+          device_ids: []
         },
-        'events': []
+        events: []
       }
     }
   })
@@ -115,8 +115,8 @@ describe('userActivity', function () {
   })
 
   it('resolves user data and list of events when passed an existing Amplitude ID', function () {
-    let amplitudeId = 11111111
-    let mockedRequest = generateMockedRequest(amplitudeId, this.userSearchIds.found, 200)
+    const amplitudeId = 11111111
+    const mockedRequest = generateMockedRequest(amplitudeId, this.userSearchIds.found, 200)
 
     return this.amplitude.userActivity(amplitudeId).then((res) => {
       expect(res.type).to.eql(this.userSearchIds.found_by_user_props)
@@ -127,8 +127,8 @@ describe('userActivity', function () {
   })
 
   it('should accept `limit` and `offset` as query params ', function () {
-    let search = 'cant-find-me'
-    let mockedRequest = generateMockedRequest({ user: search, limit: 0 }, this.userSearchIds.found, 200)
+    const search = 'cant-find-me'
+    const mockedRequest = generateMockedRequest({ user: search, limit: 0 }, this.userSearchIds.found, 200)
 
     return this.amplitude.userActivity(search, { limit: 0 }).then((res) => {
       expect(res).to.eql(this.userSearchIds.found)
@@ -139,8 +139,8 @@ describe('userActivity', function () {
   })
 
   it('resolves an empty userData object if the id cannot be found', function () {
-    let search = 'cant-find-me'
-    let mockedRequest = generateMockedRequest(search, this.userSearchIds.not_found, 200)
+    const search = 'cant-find-me'
+    const mockedRequest = generateMockedRequest(search, this.userSearchIds.not_found, 200)
 
     return this.amplitude.userActivity(search).then((res) => {
       expect(res).to.eql(this.userSearchIds.not_found)
@@ -151,8 +151,8 @@ describe('userActivity', function () {
   })
 
   it('rejects with error when unsuccesful', function () {
-    let search = 'cant-find-me'
-    let mockedRequest = generateMockedRequest(search, this.userSearchIds.found, 403)
+    const search = 'cant-find-me'
+    const mockedRequest = generateMockedRequest(search, this.userSearchIds.found, 403)
 
     return this.amplitude.userActivity(search).then((res) => {
       throw new Error('Should not have resolved')

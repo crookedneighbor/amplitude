@@ -4,7 +4,7 @@ const nock = require('nock')
 const Amplitude = require('../amplitude')
 
 function generateMockedRequest (event, status) {
-  let mockedRequest = nock('https://api.amplitude.com')
+  const mockedRequest = nock('https://api.amplitude.com')
     .post('/httpapi')
     .reply(status, { some: 'data' })
 
@@ -30,7 +30,7 @@ describe('track', function () {
   })
 
   it('resolves when the request succeeds', function () {
-    let mockedRequest = generateMockedRequest(this.event, 200)
+    const mockedRequest = generateMockedRequest(this.event, 200)
 
     return this.amplitude.track(this.data).then((res) => {
       expect(res).to.eql({ some: 'data' })
@@ -41,7 +41,7 @@ describe('track', function () {
   })
 
   it('can pass data as camelcase and it will be autoformatted to snake case for the request', function () {
-    let event = {
+    const event = {
       event_type: 'event',
       user_id: 'different_user_id',
       device_id: 'different_device_id',
@@ -56,7 +56,7 @@ describe('track', function () {
       location_lat: 'up',
       location_lng: 'down'
     }
-    let data = {
+    const data = {
       eventType: 'event',
       userId: 'different_user_id',
       deviceId: 'different_device_id',
@@ -71,7 +71,7 @@ describe('track', function () {
       locationLat: 'up',
       locationLng: 'down'
     }
-    let mockedRequest = generateMockedRequest(event, 200)
+    const mockedRequest = generateMockedRequest(event, 200)
 
     return this.amplitude.track(data).then((res) => {
       expect(res).to.eql({ some: 'data' })
@@ -88,7 +88,7 @@ describe('track', function () {
       device_id: 'unique_device_id'
     }
     this.data.user_id = 'another_user_id'
-    let mockedRequest = generateMockedRequest(this.event, 200)
+    const mockedRequest = generateMockedRequest(this.event, 200)
 
     return this.amplitude.track(this.data).then((res) => {
       expect(res).to.eql({ some: 'data' })
@@ -105,7 +105,7 @@ describe('track', function () {
       user_id: 'unique_user_id'
     }
     this.data.device_id = 'another_device_id'
-    let mockedRequest = generateMockedRequest(this.event, 200)
+    const mockedRequest = generateMockedRequest(this.event, 200)
 
     return this.amplitude.track(this.data).then((res) => {
       expect(res).to.eql({ some: 'data' })
@@ -116,7 +116,7 @@ describe('track', function () {
   })
 
   it('rejects when the request fails', function () {
-    let mockedRequest = generateMockedRequest(this.event, 500)
+    const mockedRequest = generateMockedRequest(this.event, 500)
 
     return this.amplitude.track(this.data)
       .then((res) => {
@@ -129,7 +129,7 @@ describe('track', function () {
   })
 
   it('can accept an array of event objects', function () {
-    let mockedRequest = generateMockedRequest([this.event], 200)
+    const mockedRequest = generateMockedRequest([this.event], 200)
 
     return this.amplitude.track([this.data]).then((res) => {
       expect(res).to.eql({ some: 'data' })

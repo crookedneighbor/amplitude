@@ -27,35 +27,35 @@ describe('userSearch', function () {
 
     this.userSearchIds = {
       found_by_amplitude_id: {
-        'matches': [
+        matches: [
           {
-            'user_id': 'user_id_1',
-            'amplitude_id': 111111111
+            user_id: 'user_id_1',
+            amplitude_id: 111111111
           }
         ],
-        'type': 'match_amplitude_id'
+        type: 'match_amplitude_id'
       },
       found_by_user_props: {
-        'matches': [
+        matches: [
           {
-            'user_id': 'user_id_2',
-            'amplitude_id': 22222222
+            user_id: 'user_id_2',
+            amplitude_id: 22222222
           }
         ],
-        'type': 'match_user_props'
+        type: 'match_user_props'
       },
       found_by_user_or_device_id: {
-        'matches': [
+        matches: [
           {
-            'user_id': 'user_id_3',
-            'amplitude_id': 33333333
+            user_id: 'user_id_3',
+            amplitude_id: 33333333
           }
         ],
-        'type': 'match_user_or_device_id'
+        type: 'match_user_or_device_id'
       },
       not_found: {
-        'matches': [],
-        'type': 'nomatch'
+        matches: [],
+        type: 'nomatch'
       }
     }
   })
@@ -75,8 +75,8 @@ describe('userSearch', function () {
   })
 
   it('resolves matches found by an amplitude_id', function () {
-    let search = '111111111'
-    let mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_amplitude_id, 200)
+    const search = '111111111'
+    const mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_amplitude_id, 200)
 
     return this.amplitude.userSearch(search).then((res) => {
       expect(res.matches).to.be.a('array')
@@ -90,8 +90,8 @@ describe('userSearch', function () {
   })
 
   it('resolves matches found by a user property', function () {
-    let search = 'user_id_2'
-    let mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_user_props, 200)
+    const search = 'user_id_2'
+    const mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_user_props, 200)
 
     return this.amplitude.userSearch(search).then((res) => {
       expect(res.matches).to.be.a('array')
@@ -104,8 +104,8 @@ describe('userSearch', function () {
   })
 
   it('resolves matches found by a device or user id', function () {
-    let search = 'user_id_3'
-    let mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_user_or_device_id, 200)
+    const search = 'user_id_3'
+    const mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_user_or_device_id, 200)
 
     return this.amplitude.userSearch(search).then((res) => {
       expect(res.matches).to.be.a('array')
@@ -118,8 +118,8 @@ describe('userSearch', function () {
   })
 
   it('resolves zero matches when none found', function () {
-    let search = 'cant-find-me'
-    let mockedRequest = generateMockedRequest(search, this.userSearchIds.not_found, 200)
+    const search = 'cant-find-me'
+    const mockedRequest = generateMockedRequest(search, this.userSearchIds.not_found, 200)
 
     return this.amplitude.userSearch(search).then((res) => {
       expect(res.matches).to.be.a('array')
@@ -132,8 +132,8 @@ describe('userSearch', function () {
   })
 
   it('rejects with error when unsuccesful', function () {
-    let search = 'cant-find-me'
-    let mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_amplitude_id, 403)
+    const search = 'cant-find-me'
+    const mockedRequest = generateMockedRequest(search, this.userSearchIds.found_by_amplitude_id, 403)
 
     return this.amplitude.userSearch(search).then((res) => {
       throw new Error('Should not have resolved')
