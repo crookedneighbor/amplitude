@@ -2,7 +2,7 @@
 
 var request = require('superagent')
 
-var AMPLITUDE_TOKEN_ENDPOINT = 'https://api.amplitude.com'
+var AMPLITUDE_TOKEN_ENDPOINT = 'https://api.amplitude.com/2'
 var AMPLITUDE_DASHBOARD_ENDPOINT = 'https://amplitude.com/api/2'
 
 var camelCaseToSnakeCasePropertyMap = Object.freeze({
@@ -73,7 +73,7 @@ Amplitude.prototype.track = function (data) {
   var transformedData = this._generateRequestData(data)
   var params = {
     api_key: this.token,
-    event: JSON.stringify(transformedData)
+    events: transformedData
   }
 
   return postBody(AMPLITUDE_TOKEN_ENDPOINT + '/httpapi', params)
@@ -162,13 +162,9 @@ Amplitude.prototype.eventSegmentation = function (data) {
 }
 
 function postBody (url, params) {
-  var encodedParams = Object.keys(params).map(function (key) {
-    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
-  }).join('&')
-
   return request.post(url)
-    .send(encodedParams)
-    .type('application/x-www-form-urlencoded')
+    .send(params)
+    .type('application/json')
     .set('Accept', 'application/json')
     .then(function (res) {
       return res.body
