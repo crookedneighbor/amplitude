@@ -63,7 +63,7 @@ Amplitude.prototype.identify = function (data) {
   var transformedData = this._generateRequestData(data)
   var params = {
     api_key: this.token,
-    identification: JSON.stringify(transformedData)
+    identification: transformedData
   }
 
   return postBody(AMPLITUDE_TOKEN_ENDPOINT + '/identify', params)
@@ -146,10 +146,6 @@ Amplitude.prototype.eventSegmentation = function (data) {
 
   if (!data || !data.e || !data.start || !data.end) {
     throw new Error('`e`, `start` and `end` are required data properties')
-  }
-
-  if (typeof data.e === 'object') {
-    data.e = JSON.stringify(data.e)
   }
 
   return request.get(AMPLITUDE_DASHBOARD_ENDPOINT + '/events/segmentation')
