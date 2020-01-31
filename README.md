@@ -1,5 +1,9 @@
 # amplitude
 
+## Looking for a maintainer
+
+Open an issue if you would like to maintain this module.
+
 ![Build Status](https://travis-ci.org/crookedneighbor/amplitude.svg?branch=master) ![npm version](https://badge.fury.io/js/amplitude.svg)
 
 Server side implementation of [Amplitude](https://amplitude.com)'s http api.
